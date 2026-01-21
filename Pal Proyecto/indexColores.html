@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación de Colores - Inglés Inclusivo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 95%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #ffcc00;
+        }
+        
+        /* Decoración de fondo mejorada */
+        .background-decoration {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeead, #ffcc5c, #ff6f69);
+            border-radius: 0 0 0 200px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .background-decoration-2 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #a1c4fd);
+            border-radius: 0 200px 0 0;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .title h1 {
+            font-size: 3.5rem;
+            color: #2d3436;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-shadow: 3px 3px 0px rgba(255, 204, 0, 0.3);
+        }
+        
+        .title p {
+            color: #636e72;
+            font-size: 1.3rem;
+            font-style: italic;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            border: 3px dashed #3498db;
+        }
+        
+        .color-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .category {
+            flex: 1;
+            min-width: 300px;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 5px solid;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+        }
+        
+        .category:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-title {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid;
+            text-align: center;
+            position: relative;
+        }
+        
+        .category-title:after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 25%;
+            width: 50%;
+            height: 4px;
+            background-color: white;
+        }
+        
+        .color-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 22px;
+            padding: 15px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+            position: relative;
+        }
+        
+        .color-item:hover {
+            transform: translateX(10px);
+            background-color: #f8f9fa;
+            border-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .color-item:focus {
+            outline: 4px solid #ffcc00;
+            outline-offset: 2px;
+        }
+        
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            margin-right: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .color-item:hover .color-swatch {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .color-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2d3436;
+        }
+        
+        .color-english {
+            display: block;
+            font-size: 1.3rem;
+            color: #636e72;
+            font-weight: 600;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        /* Colores primarios */
+        .primary {
+            border-color: #ff6b6b;
+        }
+        
+        .primary:before {
+            background-color: #ff6b6b;
+        }
+        
+        .primary .category-title {
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        
+        .primary .color-swatch#rojo {
+            background-color: #ff6b6b;
+        }
+        
+        .primary .color-swatch#azul {
+            background-color: #4ecdc4;
+        }
+        
+        .primary .color-swatch#amarillo {
+            background-color: #ffeaa7;
+        }
+        
+        /* Colores secundarios */
+        .secondary {
+            border-color: #a29bfe;
+        }
+        
+        .secondary:before {
+            background-color: #a29bfe;
+        }
+        
+        .secondary .category-title {
+            color: #a29bfe;
+            border-color: #a29bfe;
+        }
+        
+        .secondary .color-swatch#verde {
+            background-color: #00b894;
+        }
+        
+        .secondary .color-swatch#naranja {
+            background-color: #fab1a0;
+        }
+        
+        .secondary .color-swatch#morado {
+            background-color: #a29bfe;
+        }
+        
+        /* Colores terciarios */
+        .tertiary {
+            border-color: #fd79a8;
+        }
+        
+        .tertiary:before {
+            background-color: #fd79a8;
+        }
+        
+        .tertiary .category-title {
+            color: #fd79a8;
+            border-color: #fd79a8;
+        }
+        
+        .tertiary .color-swatch#rojo-naranja {
+            background: linear-gradient(45deg, #ff6b6b 50%, #fab1a0 50%);
+        }
+        
+        .tertiary .color-swatch#amarillo-verde {
+            background: linear-gradient(45deg, #ffeaa7 50%, #00b894 50%);
+        }
+        
+        .tertiary .color-swatch#azul-morado {
+            background: linear-gradient(45deg, #4ecdc4 50%, #a29bfe 50%);
+        }
+        
+        /* Controles de accesibilidad */
+        .accessibility-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .accessibility-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .accessibility-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .accessibility-btn:focus {
+            outline: 4px solid #ffcc00;
+            outline-offset: 2px;
+        }
+        
+        .audio-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff6b6b;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 50px;
+            color: #636e72;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px dotted #3498db;
+        }
+        
+        /* Modo alto contraste */
+        .alto-contraste {
+            background: #000 !important;
+            color: #fff !important;
+        }
+        
+        .alto-contraste .container {
+            background-color: #000 !important;
+            color: #fff !important;
+            border-color: #ffff00 !important;
+        }
+        
+        .alto-contraste .category {
+            background-color: #000 !important;
+            color: #fff !important;
+            border-color: #ffff00 !important;
+        }
+        
+        .alto-contraste .color-name,
+        .alto-contraste .color-english {
+            color: #fff !important;
+        }
+        
+        /* Texto grande */
+        .texto-grande {
+            font-size: 1.4rem;
+        }
+        
+        .texto-grande .color-name {
+            font-size: 1.9rem;
+        }
+        
+        .texto-grande .color-english {
+            font-size: 1.6rem;
+        }
+        
+        .texto-grande .category-title {
+            font-size: 2.6rem;
+        }
+        
+        /* Mensaje de accesibilidad */
+        .accessibility-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            max-width: 300px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .color-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category {
+                min-width: 90%;
+                max-width: 500px;
+            }
+            
+            .title h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .title h1 {
+                font-size: 2.2rem;
+            }
+            
+            .title p {
+                font-size: 1.1rem;
+            }
+            
+            .category-title {
+                font-size: 1.8rem;
+            }
+            
+            .color-name {
+                font-size: 1.4rem;
+            }
+            
+            .color-english {
+                font-size: 1.1rem;
+            }
+            
+            .color-swatch {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        /* Animaciones */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Indicador para navegación por teclado */
+        .color-item:focus-visible {
+            outline: 4px solid #ffcc00 !important;
+            outline-offset: 2px !important;
+        }
+        
+        /* NUEVOS COLORES AÑADIDOS */
+        .extra-colors {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 3px dashed #ddd;
+        }
+        
+        .extra-colors-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2d3436;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .extra-colors-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 40%;
+            width: 20%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #a29bfe);
+            border-radius: 2px;
+        }
+        
+        .extra-colors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .extra-color-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .extra-color-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .extra-color-swatch {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            border: 4px solid white;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .rosa {
+            background-color: #ffafcc;
+        }
+        
+        .marron {
+            background-color: #a68064;
+        }
+        
+        .gris {
+            background-color: #b0b7c1;
+        }
+        
+        .turquesa {
+            background-color: #06d6a0;
+        }
+        
+        .blanco {
+            background-color: #ffffff;
+            border: 4px solid #ddd !important;
+        }
+        
+        .negro {
+            background-color: #2d3436;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="background-decoration"></div>
+        <div class="background-decoration-2"></div>
+        
+        <div class="title">
+            <h1>🌈 Clasificación de Colores</h1>
+            <p>Aprende los colores en inglés de forma divertida y accesible</p>
+        </div>
+        
+        <!-- Controles de accesibilidad -->
+        <div class="accessibility-controls">
+            <button class="accessibility-btn" id="highContrastBtn" aria-label="Activar modo alto contraste">
+                <i class="fas fa-adjust"></i> Alto Contraste
+            </button>
+            <button class="accessibility-btn" id="largeTextBtn" aria-label="Aumentar tamaño de texto">
+                <i class="fas fa-text-height"></i> Texto Grande
+            </button>
+            <button class="accessibility-btn" id="speakAllBtn" aria-label="Escuchar todos los colores">
+                <i class="fas fa-volume-up"></i> Escuchar Colores
+            </button>
+            <button class="accessibility-btn" onclick="window.location.href='index.html'" aria-label="Volver a la página principal">
+                <i class="fas fa-home"></i> Volver al Inicio
+            </button>
+        </div>
+        
+        <div class="color-categories">
+            <!-- Colores Primarios -->
+            <div class="category primary" tabindex="0">
+                <div class="audio-indicator" aria-label="Esta sección tiene audio">🔊</div>
+                <h2 class="category-title">Colores Primarios</h2>
+                
+                <div class="color-item" tabindex="0" onclick="speakColor('Rojo', 'Red')" onkeydown="if(event.key==='Enter') speakColor('Rojo', 'Red')">
+                    <div class="color-swatch" id="rojo"></div>
+                    <div class="color-info">
+                        <div class="color-name">Rojo</div>
+                        <div class="color-english">(Red)</div>
+                    </div>
+                </div>
+                
+                <div class="color-item" tabindex="0" onclick="speakColor('Azul', 'Blue')" onkeydown="if(event.key==='Enter') speakColor('Azul', 'Blue')">
+                    <div class="color-swatch" id="azul"></div>
+                    <div class="color-info">
+                        <div class="color-name">Azul</div>
+                        <div class="color-english">(Blue)</div>
+                    </div>
+                </div>
+                
+                <div class="color-item" tabindex="0" onclick="speakColor('Amarillo', 'Yellow')" onkeydown="if(event.key==='Enter') speakColor('Amarillo', 'Yellow')">
+                    <div class="color-swatch" id="amarillo"></div>
+                    <div class="color-info">
+                        <div class="color-name">Amarillo</div>
+                        <div class="color-english">(Yellow)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Colores Secundarios -->
+            <div class="category secondary" tabindex="0">
+                <div class="audio-indicator" aria-label="Esta sección tiene audio">🔊</div>
+                <h2 class="category-title">Colores Secundarios</h2>
+                
+                <div class="color-item" tabindex="0" onclick="speakColor('Verde', 'Green')" onkeydown="if(event.key==='Enter') speakColor('Verde', 'Green')">
+                    <div class="color-swatch" id="verde"></div>
+                    <div class="color-info">
+                        <div class="color-name">Verde</div>
+                        <div class="color-english">(Green)</div>
+                    </div>
+                </div>
+                
+                <div class="color-item" tabindex="0" onclick="speakColor('Naranja', 'Orange')" onkeydown="if(event.key==='Enter') speakColor('Naranja', 'Orange')">
+                    <div class="color-swatch" id="naranja"></div>
+                    <div class="color-info">
+                        <div class="color-name">Naranja</div>
+                        <div class="color-english">(Orange)</div>
+                    </div>
+                </div>
+                
+                <div class="color-item" tabindex="0" onclick="speakColor('Morado', 'Purple')" onkeydown="if(event.key==='Enter') speakColor('Morado', 'Purple')">
+                    <div class="color-swatch" id="morado"></div>
+                    <div class="color-info">
+                        <div class="color-name">Morado</div>
+                        <div class="color-english">(Purple)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Colores Terciarios -->
+            <div class="category tertiary" tabindex="0">
+                <div class="audio-indicator" aria-label="Esta sección tiene audio">🔊</div>
+                <h2 class="category-title">Colores Terciarios</h2>
+                
+                <div class="color-item" tabindex="0" onclick="speakColor('Rojo-Naranja', 'Red-Orange')" onkeydown="if(event.key==='Enter') speakColor('Rojo-Naranja', 'Red-Orange')">
+                    <div class="color-swatch" id="rojo-naranja"></div>
+                    <div class="color-info">
+                        <div class="color-name">Rojo-Naranja</div>
+                        <div class="color-english">(Red-Orange)</div>
+                    </div>
+                </div>
+                
+                <div class="color-item" tabindex="0" onclick="speakColor('Amarillo-Verde', 'Yellow-Green')" onkeydown="if(event.key==='Enter') speakColor('Amarillo-Verde', 'Yellow-Green')">
+                    <div class="color-swatch" id="amarillo-verde"></div>
+                    <div class="color-info">
+                        <div class="color-name">Amarillo-Verde</div>
+                        <div class="color-english">(Yellow-Green)</div>
+                    </div>
+                </div>
+                
+                <div class="color-item" tabindex="0" onclick="speakColor('Azul-Morado', 'Blue-Purple')" onkeydown="if(event.key==='Enter') speakColor('Azul-Morado', 'Blue-Purple')">
+                    <div class="color-swatch" id="azul-morado"></div>
+                    <div class="color-info">
+                        <div class="color-name">Azul-Morado</div>
+                        <div class="color-english">(Blue-Purple)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NUEVOS COLORES AÑADIDOS -->
+        <div class="extra-colors">
+            <h2 class="extra-colors-title">🎨 Más Colores para Aprender</h2>
+            <div class="extra-colors-grid">
+                <div class="extra-color-item" tabindex="0" onclick="speakColor('Rosa', 'Pink')" onkeydown="if(event.key==='Enter') speakColor('Rosa', 'Pink')">
+                    <div class="extra-color-swatch rosa"></div>
+                    <div class="color-info">
+                        <div class="color-name">Rosa</div>
+                        <div class="color-english">(Pink)</div>
+                    </div>
+                </div>
+                
+                <div class="extra-color-item" tabindex="0" onclick="speakColor('Marrón', 'Brown')" onkeydown="if(event.key==='Enter') speakColor('Marrón', 'Brown')">
+                    <div class="extra-color-swatch marron"></div>
+                    <div class="color-info">
+                        <div class="color-name">Marrón</div>
+                        <div class="color-english">(Brown)</div>
+                    </div>
+                </div>
+                
+                <div class="extra-color-item" tabindex="0" onclick="speakColor('Gris', 'Gray')" onkeydown="if(event.key==='Enter') speakColor('Gris', 'Gray')">
+                    <div class="extra-color-swatch gris"></div>
+                    <div class="color-info">
+                        <div class="color-name">Gris</div>
+                        <div class="color-english">(Gray)</div>
+                    </div>
+                </div>
+                
+                <div class="extra-color-item" tabindex="0" onclick="speakColor('Turquesa', 'Turquoise')" onkeydown="if(event.key==='Enter') speakColor('Turquesa', 'Turquoise')">
+                    <div class="extra-color-swatch turquesa"></div>
+                    <div class="color-info">
+                        <div class="color-name">Turquesa</div>
+                        <div class="color-english">(Turquoise)</div>
+                    </div>
+                </div>
+                
+                <div class="extra-color-item" tabindex="0" onclick="speakColor('Blanco', 'White')" onkeydown="if(event.key==='Enter') speakColor('Blanco', 'White')">
+                    <div class="extra-color-swatch blanco"></div>
+                    <div class="color-info">
+                        <div class="color-name">Blanco</div>
+                        <div class="color-english">(White)</div>
+                    </div>
+                </div>
+                
+                <div class="extra-color-item" tabindex="0" onclick="speakColor('Negro', 'Black')" onkeydown="if(event.key==='Enter') speakColor('Negro', 'Black')">
+                    <div class="extra-color-swatch negro"></div>
+                    <div class="color-info">
+                        <div class="color-name">Negro</div>
+                        <div class="color-english">(Black)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            <p><strong>💡 Did you know?</strong> Los colores terciarios se forman mezclando un color primario con un secundario adyacente.</p>
+            <p><strong>🔊 Accesibilidad:</strong> Haz clic o presiona Enter en cualquier color para escuchar su nombre en español e inglés.</p>
+        </div>
+        
+        <!-- Mensaje de accesibilidad -->
+        <div class="accessibility-message" id="accessibilityMessage" aria-live="polite"></div>
+    </div>
+    
+    <script>
+        // Variables globales
+        let audioActivo = true;
+        let altoContrasteActivo = false;
+        let textoGrandeActivo = false;
+        
+        // Función para hablar un color
+        function speakColor(colorEspanol, colorIngles) {
+            if ("speechSynthesis" in window && audioActivo) {
+                speechSynthesis.cancel();
+                
+                const mensaje = new SpeechSynthesisUtterance();
+                mensaje.text = `${colorEspanol}. En inglés: ${colorIngles}`;
+                mensaje.lang = "es-ES";
+                mensaje.rate = 0.9;
+                mensaje.pitch = 1.2;
+                mensaje.volume = 1;
+                
+                speechSynthesis.speak(mensaje);
+                
+                // Mostrar mensaje visual
+                showAccessibilityMessage(`🔊 ${colorEspanol} - ${colorIngles}`);
+                
+                // Efecto visual para el elemento
+                const elemento = event.currentTarget || event.target.closest('.color-item, .extra-color-item');
+                if (elemento) {
+                    elemento.style.backgroundColor = '#e3f2fd';
+                    setTimeout(() => {
+                        elemento.style.backgroundColor = '';
+                    }, 1000);
+                }
+            }
+        }
+        
+        // Función para hablar todos los colores
+        function speakAllColors() {
+            if ("speechSynthesis" in window && audioActivo) {
+                speechSynthesis.cancel();
+                
+                const colores = [
+                    {es: "Rojo", en: "Red"},
+                    {es: "Azul", en: "Blue"},
+                    {es: "Amarillo", en: "Yellow"},
+                    {es: "Verde", en: "Green"},
+                    {es: "Naranja", en: "Orange"},
+                    {es: "Morado", en: "Purple"},
+                    {es: "Rojo-Naranja", en: "Red-Orange"},
+                    {es: "Amarillo-Verde", en: "Yellow-Green"},
+                    {es: "Azul-Morado", en: "Blue-Purple"},
+                    {es: "Rosa", en: "Pink"},
+                    {es: "Marrón", en: "Brown"},
+                    {es: "Gris", en: "Gray"},
+                    {es: "Turquesa", en: "Turquoise"},
+                    {es: "Blanco", en: "White"},
+                    {es: "Negro", en: "Black"}
+                ];
+                
+                let textoCompleto = "Vamos a repasar todos los colores. ";
+                colores.forEach(color => {
+                    textoCompleto += `${color.es}, en inglés: ${color.en}. `;
+                });
+                textoCompleto += "¡Muy bien! Has repasado todos los colores.";
+                
+                const mensaje = new SpeechSynthesisUtterance();
+                mensaje.text = textoCompleto;
+                mensaje.lang = "es-ES";
+                mensaje.rate = 0.8;
+                mensaje.pitch = 1.2;
+                mensaje.volume = 1;
+                
+                speechSynthesis.speak(mensaje);
+                
+                showAccessibilityMessage("🔊 Repasando todos los colores...");
+            }
+        }
+        
+        // Mostrar mensaje de accesibilidad
+        function showAccessibilityMessage(texto) {
+            const mensajeDiv = document.getElementById('accessibilityMessage');
+            mensajeDiv.textContent = texto;
+            mensajeDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                mensajeDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Alternar alto contraste
+        document.getElementById('highContrastBtn').addEventListener('click', function() {
+            altoContrasteActivo = !altoContrasteActivo;
+            
+            if (altoContrasteActivo) {
+                document.body.classList.add('alto-contraste');
+                this.innerHTML = '<i class="fas fa-adjust"></i> Contraste Normal';
+                this.setAttribute('aria-label', 'Desactivar modo alto contraste');
+                showAccessibilityMessage('🎨 Modo alto contraste activado');
+                
+                if (audioActivo) {
+                    const mensaje = new SpeechSynthesisUtterance();
+                    mensaje.text = "Modo alto contraste activado. Los colores ahora tienen más contraste para mejor visibilidad.";
+                    mensaje.lang = "es-ES";
+                    speechSynthesis.speak(mensaje);
+                }
+            } else {
+                document.body.classList.remove('alto-contraste');
+                this.innerHTML = '<i class="fas fa-adjust"></i> Alto Contraste';
+                this.setAttribute('aria-label', 'Activar modo alto contraste');
+                showAccessibilityMessage('🎨 Modo alto contraste desactivado');
+            }
+        });
+        
+        // Alternar texto grande
+        document.getElementById('largeTextBtn').addEventListener('click', function() {
+            textoGrandeActivo = !textoGrandeActivo;
+            
+            if (textoGrandeActivo) {
+                document.body.classList.add('texto-grande');
+                this.innerHTML = '<i class="fas fa-text-height"></i> Texto Normal';
+                this.setAttribute('aria-label', 'Reducir tamaño de texto');
+                showAccessibilityMessage('🔍 Texto grande activado');
+                
+                if (audioActivo) {
+                    const mensaje = new SpeechSynthesisUtterance();
+                    mensaje.text = "Texto grande activado. Las letras ahora son más grandes para mejor visibilidad.";
+                    mensaje.lang = "es-ES";
+                    speechSynthesis.speak(mensaje);
+                }
+            } else {
+                document.body.classList.remove('texto-grande');
+                this.innerHTML = '<i class="fas fa-text-height"></i> Texto Grande';
+                this.setAttribute('aria-label', 'Aumentar tamaño de texto');
+                showAccessibilityMessage('🔍 Texto grande desactivado');
+            }
+        });
+        
+        // Configurar botón para hablar todos los colores
+        document.getElementById('speakAllBtn').addEventListener('click', speakAllColors);
+        
+        // Inicialización
+        window.addEventListener('DOMContentLoaded', function() {
+            // Activar audio automáticamente
+            audioActivo = true;
+            
+            // Mensaje de bienvenida
+            setTimeout(() => {
+                if (audioActivo) {
+                    const mensaje = new SpeechSynthesisUtterance();
+                    mensaje.text = "Bienvenido a la página de colores. Aquí aprenderás los colores en español e inglés. Haz clic en cualquier color para escuchar su nombre. Usa los botones de arriba para ajustar la accesibilidad.";
+                    mensaje.lang = "es-ES";
+                    mensaje.rate = 0.9;
+                    mensaje.pitch = 1.2;
+                    speechSynthesis.speak(mensaje);
+                    
+                    showAccessibilityMessage("🎨 Bienvenido a la página de colores");
+                }
+            }, 1000);
+            
+            // Configurar navegación por teclado
+            document.addEventListener('keydown', function(e) {
+                // Atajo para alto contraste: Alt + C
+                if (e.altKey && e.key === 'c') {
+                    e.preventDefault();
+                    document.getElementById('highContrastBtn').click();
+                }
+                
+                // Atajo para texto grande: Alt + T
+                if (e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    document.getElementById('largeTextBtn').click();
+                }
+                
+                // Atajo para hablar todos: Alt + A
+                if (e.altKey && e.key === 'a') {
+                    e.preventDefault();
+                    speakAllColors();
+                }
+            });
+            
+            // Hacer que los elementos sean más interactivos
+            const elementosColor = document.querySelectorAll('.color-item, .extra-color-item');
+            elementosColor.forEach(elemento => {
+                elemento.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('pulse')) {
+                        this.classList.add('pulse');
+                    }
+                });
+                
+                elemento.addEventListener('mouseleave', function() {
+                    this.classList.remove('pulse');
+                });
+                
+                elemento.addEventListener('focus', function() {
+                    this.classList.add('pulse');
+                });
+                
+                elemento.addEventListener('blur', function() {
+                    this.classList.remove('pulse');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

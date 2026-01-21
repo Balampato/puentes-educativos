@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Inglés Accesible para Niños</title>
+    <link rel="stylesheet" href="dsv.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Controles de accesibilidad -->
+    <div class="accessibility-controls" aria-label="Controles de accesibilidad">
+        <div>
+            <button class="accessibility-btn" id="highContrastBtn" aria-label="Activar modo alto contraste">
+                <i class="fas fa-adjust"></i> Alto Contraste
+            </button>
+            <button class="accessibility-btn" id="largeTextBtn" aria-label="Aumentar tamaño de texto">
+                <i class="fas fa-text-height"></i> Texto Grande
+            </button>
+            <button class="accessibility-btn" id="speakPageBtn" aria-label="Leer contenido de la página en voz alta">
+                <i class="fas fa-volume-up"></i> Leer Página
+            </button>
+        </div>
+        <div>
+            <button class="accessibility-btn" id="resetAccessibilityBtn" aria-label="Restablecer ajustes de accesibilidad">
+                <i class="fas fa-redo"></i> Restablecer
+            </button>
+        </div>
+    </div>
+
+    <header class="header" role="banner">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link" aria-label="Página de inicio">
+                <img class="logo" src="img/logo.jpeg" alt="Logotipo del curso de inglés accesible">
+            </a>
+        </div>
+        <h1 id="pageTitle">Curso de Inglés Accesible para Niños</h1>
+        <p>Diseñado para niños con discapacidades visuales y auditivas</p>
+    </header>
+
+    <main class="temas" role="main" aria-labelledby="pageTitle">
+        <section class="columna" aria-label="Primera columna de temas">
+            <article class="tema" tabindex="0" role="button" aria-describedby="descSaludos">
+                <div class="tema-img-container">
+                    <img src="https://www.bing.com/th/id/OIP.w2L5u6-VcYhxvGrxGnD_dwHaHa?w=187&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Dos niños dándose la mano y saludándose">
+                    <div class="audio-indicator" aria-label="Este tema incluye apoyo auditivo">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+                <h3>Saludos y Presentaciones</h3>
+                <p id="descSaludos">Aprende a saludar y presentarte en inglés con apoyos visuales y auditivos</p>
+                <a href="09.html" class="tema-link" target="_blank" aria-label="Abrir lección de saludos y presentaciones">Comenzar Lección</a>
+            </article>
+
+            <article class="tema" tabindex="0" role="button" aria-describedby="descAlfabeto">
+                <div class="tema-img-container">
+                    <img src="https://static.vecteezy.com/system/resources/previews/014/339/905/original/school-abc-icon-cartoon-alphabet-font-vector.jpg" alt="Letras del alfabeto inglés en colores brillantes">
+                    <div class="audio-indicator" aria-label="Este tema incluye apoyo auditivo">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+                <h3>Alfabeto</h3>
+                <p id="descAlfabeto">Aprende el alfabeto inglés con letras grandes, colores contrastantes y sonidos</p>
+                <a href="alphabeto.html" class="tema-link" target="_blank" aria-label="Abrir lección del alfabeto inglés">Comenzar Lección</a>
+            </article>
+
+            <article class="tema" tabindex="0" role="button" aria-describedby="descNumeros">
+                <div class="tema-img-container">
+                    <img src="https://www.etapainfantil.com/wp-content/uploads/2022/11/numero-3-colorear.jpg.webp" alt="Número 3 grande y colorido para aprender">
+                    <div class="audio-indicator" aria-label="Este tema incluye apoyo auditivo">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+                <h3>Números y Fechas</h3>
+                <p id="descNumeros">Aprende los números, días y meses en inglés con representaciones táctiles y auditivas</p>
+                <a href="num.html" class="tema-link" target="_blank" aria-label="Abrir lección de números y fechas en inglés">Comenzar Lección</a>
+            </article>
+
+            <article class="tema" tabindex="0" role="button" aria-describedby="descColores">
+                <div class="tema-img-container">
+                    <img src="https://img.genial.ly/6197ec9ec3bca700127c7c96/e3700394-abd6-449f-9a7e-6eb7dfc48123.png" alt="Círculos de colores brillantes para aprender los colores">
+                    <div class="audio-indicator" aria-label="Este tema incluye apoyo auditivo">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+                <h3>Colores</h3>
+                <p id="descColores">Aprende los colores en inglés con alto contraste y descripciones auditivas</p>
+                <a href="indexColores.html" class="tema-link" target="_blank" aria-label="Abrir lección de colores en inglés">Comenzar Lección</a>
+            </article>
+        </section>
+<!-- https://github.com/Balampato/MundoMultisensorial-ninos.git -->
+        <section class="columna" aria-label="Segunda columna de temas">
+            <article class="tema" tabindex="0" role="button" aria-describedby="descFamilia">
+                <div class="tema-img-container">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.Yqg_IGEo6xFeY3KqeyP2hQHaHa" alt="Familia diversa sonriente junta">
+                    <div class="audio-indicator" aria-label="Este tema incluye apoyo auditivo">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+                <h3>La Familia</h3>
+                <p id="descFamilia">Aprende los miembros de la familia en inglés con imágenes claras y descripciones detalladas</p>
+                <a href="lafamilia.html" class="tema-link" target="_blank" aria-label="Abrir lección sobre la familia en inglés">Comenzar Lección</a>
+            </article>
+
+            <article class="tema" tabindex="0" role="button" aria-describedby="descCasa">
+                <div class="tema-img-container">
+                    <img src="https://lh6.ggpht.com/-LExfxDflQrI/TKYavfT60oI/AAAAAAAAD9A/IDPYX2-hVDY/CCcasa-9454.jpg?imgmax=640" alt="Casa con diferentes habitaciones identificadas">
+                    <div class="audio-indicator" aria-label="Este tema incluye apoyo auditivo">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+                <h3>La Casa y Lugares</h3>
+                <p id="descCasa">Aprende las partes de la casa y lugares comunes en inglés con recorridos virtuales accesibles</p>
+                <a href="lacasa.html" class="tema-link" target="_blank" aria-label="Abrir lección sobre la casa y lugares en inglés">Comenzar Lección</a>
+            </article>
+
+            <article class="tema" tabindex="0" role="button" aria-describedby="descPronombres">
+                <div class="tema-img-container">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.taxwesRTqh9fiKxd4tKaXAHaHA" alt="Representación visual de pronombres personales en inglés">
+                    <div class="audio-indicator" aria-label="Este tema incluye apoyo auditivo">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+                <h3>Pronombres</h3>
+                <p id="descPronombres">Aprende los pronombres en inglés con ayudas visuales y ejemplos auditivos</p>
+                <a href="Proyecto.html" class="tema-link" target="_blank" aria-label="Abrir lección sobre pronombres en inglés">Comenzar Lección</a>
+            </article>
+
+            <article class="tema" tabindex="0" role="button" aria-describedby="descVerbos">
+                <div class="tema-img-container">
+                    <img src="https://i.pinimg.com/736x/bb/21/97/bb2197fe84d7583ab9c6a99527c8a783.jpg" alt="Ilustración de acciones y verbos comunes en inglés">
+                    <div class="audio-indicator" aria-label="Este tema incluye apoyo auditivo">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+                <h3>Verbos</h3>
+                <p id="descVerbos">Aprende verbos básicos en inglés con representaciones visuales claras y apoyo auditivo</p>
+                <a href="Proyecto.html" class="tema-link" target="_blank" aria-label="Abrir lección sobre verbos en inglés">Comenzar Lección</a>
+            </article>
+
+            <article class="tema" tabindex="0" role="button" aria-describedby="descEvaluacion">
+                <div class="tema-img-container">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.wkfwZ6_BN05tAMD7mNW7aQHaFU?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Niño completando una evaluación con herramientas accesibles">
+                    <div class="audio-indicator" aria-label="Este tema incluye apoyo auditivo">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+                <h3>Evaluación</h3>
+                <p id="descEvaluacion">Evalúa lo aprendido con herramientas accesibles para diferentes capacidades</p>
+                <a href="eva.html" class="tema-link" target="_blank" aria-label="Abrir evaluación del curso">Realizar Evaluación</a>
+            </article>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <p>Shaders - Todos los derechos reservados</p>
+        <p class="footer-accessibility">Diseñado con accesibilidad para niños con discapacidades visuales y auditivas</p>
+        <p>Controles de accesibilidad disponibles en la parte superior de la página</p>
+    </footer>
+
+    <!-- Notificación de accesibilidad -->
+    <div class="accessibility-notification" id="accessibilityNotification" role="alert" aria-live="polite"></div>
+
+    <script>
+        // Funcionalidades de accesibilidad
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos DOM
+            const highContrastBtn = document.getElementById('highContrastBtn');
+            const largeTextBtn = document.getElementById('largeTextBtn');
+            const speakPageBtn = document.getElementById('speakPageBtn');
+            const resetAccessibilityBtn = document.getElementById('resetAccessibilityBtn');
+            const notification = document.getElementById('accessibilityNotification');
+            
+            // Activar/desactivar alto contraste
+            highContrastBtn.addEventListener('click', function() {
+                document.body.classList.toggle('high-contrast');
+                const isActive = document.body.classList.contains('high-contrast');
+                this.setAttribute('aria-label', isActive ? 'Desactivar modo alto contraste' : 'Activar modo alto contraste');
+                showNotification(isActive ? 'Modo alto contraste activado' : 'Modo alto contraste desactivado');
+                
+                // Guardar preferencia
+                localStorage.setItem('highContrast', isActive);
+            });
+            
+            // Activar/desactivar texto grande
+            largeTextBtn.addEventListener('click', function() {
+                document.body.classList.toggle('large-text');
+                const isActive = document.body.classList.contains('large-text');
+                this.setAttribute('aria-label', isActive ? 'Reducir tamaño de texto' : 'Aumentar tamaño de texto');
+                showNotification(isActive ? 'Texto grande activado' : 'Texto grande desactivado');
+                
+                // Guardar preferencia
+                localStorage.setItem('largeText', isActive);
+            });
+            
+            // Leer contenido de la página
+            speakPageBtn.addEventListener('click', function() {
+                const pageTitle = document.getElementById('pageTitle').textContent;
+                const temas = document.querySelectorAll('.tema h3');
+                let textToSpeak = pageTitle + ". Esta página contiene lecciones de inglés accesibles para niños. ";
+                
+                temas.forEach((tema, index) => {
+                    textToSpeak += `Lección ${index + 1}: ${tema.textContent}. `;
+                });
+                
+                textToSpeak += "Presione Tab para navegar entre las lecciones y Enter para abrirlas.";
+                
+                // Usar la Web Speech API si está disponible
+                if ('speechSynthesis' in window) {
+                    const speech = new SpeechSynthesisUtterance();
+                    speech.text = textToSpeak;
+                    speech.lang = 'es-ES';
+                    speech.rate = 0.9;
+                    speech.pitch = 1;
+                    speech.volume = 1;
+                    
+                    // Detener cualquier discurso anterior
+                    window.speechSynthesis.cancel();
+                    window.speechSynthesis.speak(speech);
+                    
+                    showNotification('Leyendo contenido de la página');
+                } else {
+                    showNotification('Tu navegador no soporta lectura de texto en voz alta');
+                }
+            });
+            
+            // Restablecer ajustes de accesibilidad
+            resetAccessibilityBtn.addEventListener('click', function() {
+                document.body.classList.remove('high-contrast', 'large-text');
+                localStorage.removeItem('highContrast');
+                localStorage.removeItem('largeText');
+                
+                // Restablecer etiquetas ARIA
+                highContrastBtn.setAttribute('aria-label', 'Activar modo alto contraste');
+                largeTextBtn.setAttribute('aria-label', 'Aumentar tamaño de texto');
+                
+                showNotification('Ajustes de accesibilidad restablecidos');
+            });
+            
+            // Cargar preferencias guardadas
+            function loadPreferences() {
+                if (localStorage.getItem('highContrast') === 'true') {
+                    document.body.classList.add('high-contrast');
+                    highContrastBtn.setAttribute('aria-label', 'Desactivar modo alto contraste');
+                }
+                
+                if (localStorage.getItem('largeText') === 'true') {
+                    document.body.classList.add('large-text');
+                    largeTextBtn.setAttribute('aria-label', 'Reducir tamaño de texto');
+                }
+            }
+            
+            // Mostrar notificación temporal
+            function showNotification(message) {
+                notification.textContent = message;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Navegación por teclado mejorada
+            document.addEventListener('keydown', function(e) {
+                // Atajo para alto contraste: Alt + C
+                if (e.altKey && e.key === 'c') {
+                    e.preventDefault();
+                    highContrastBtn.click();
+                }
+                
+                // Atajo para texto grande: Alt + T
+                if (e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    largeTextBtn.click();
+                }
+                
+                // Atajo para leer página: Alt + R
+                if (e.altKey && e.key === 'r') {
+                    e.preventDefault();
+                    speakPageBtn.click();
+                }
+                
+                // Atajo para resetear: Alt + Shift + R
+                if (e.altKey && e.shiftKey && e.key === 'R') {
+                    e.preventDefault();
+                    resetAccessibilityBtn.click();
+                }
+            });
+            
+            // Hacer que las tarjetas sean activables con Enter
+            const tarjetas = document.querySelectorAll('.tema');
+            tarjetas.forEach(tarjeta => {
+                tarjeta.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        const link = this.querySelector('.tema-link');
+                        if (link) {
+                            link.click();
+                        }
+                    }
+                });
+            });
+            
+            // Inicializar cargando preferencias
+            loadPreferences();
+            
+            // Mostrar mensaje de bienvenida accesible
+            setTimeout(() => {
+                showNotification('Bienvenido al curso de inglés accesible. Use los controles en la parte superior para ajustar la accesibilidad.');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

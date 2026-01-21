@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Clientes</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f9;
+    }
+
+    /* Encabezado */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+      background-color: #1e3a8a;
+      color: white;
+    }
+
+    header img {
+      width: 60px;
+      height: 60px;
+      margin-right: 15px;
+    }
+
+    header h1 {
+      font-size: 47px;
+      margin: 0 auto;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Contenido principal */
+    main {
+      padding: 40px 60px;
+    }
+
+    main h2 {
+      font-size: 41px;
+      margin-bottom: 30px;
+      color: #1e3a8a;
+      text-align: center;
+    }
+
+    /* Casos de éxito */
+    .casos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-bottom: 50px;
+      justify-items: center;
+    }
+
+    .caso {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .cuadro {
+      width: 120px;
+      height: 120px;
+      background-color: #e5e7eb;
+      border: dashed #ff8fab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .cuadro2 {
+      width: 120px;
+      height: 120px;
+      background-color: #e5e7eb;
+      border: dashed #0000ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .linea-nombre {
+      width: 150px;
+      border-bottom: 2px solid #374151;
+      padding-bottom: 5px;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    /* Dibujos de inglés */
+    .imagenes {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .imagenes img {
+      width: 150px;
+      height: auto;
+    }
+
+    .logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--color-botones);
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <a href="index.html" class="logo" alt="Logotipo de la empresa">
+      <img class="logo" src="img/logo.jpeg">
+    </a>
+
+  </header>
+
+  <main>
+    <h2>Casos de éxito</h2>
+
+    <section class="casos">
+      <div class="caso">
+        <div class="cuadro">Foto del cliente</div>
+        <div class="linea-nombre">Fernanda</div>
+      </div>
+      <div class="caso">
+        <div class="cuadro">Foto del cliente</div>
+        <div class="linea-nombre">Brenda</div>
+      </div>
+      <div class="caso">
+        <div class="cuadro2">Foto del cliente</div>
+        <div class="linea-nombre">Jose</div>
+      </div>
+      <div class="caso">
+        <div class="cuadro2">Foto del cliente</div>
+        <div class="linea-nombre">Yael</div>
+      </div>
+      <div class="caso">
+        <div class="cuadro">Foto del cliente</div>
+        <div class="linea-nombre">Karla</div>
+      </div>
+      <div class="caso">
+        <div class="cuadro2">Foto del cliente</div>
+        <div class="linea-nombre">David</div>
+      </div>
+      <div class="caso">
+        <div class="cuadro2">Foto del cliente</div>
+        <div class="linea-nombre">Dante</div>
+      </div>
+      <div class="caso">
+        <div class="cuadro">Foto del cliente</div>
+        <div class="linea-nombre">Daniela</div>
+      </div>
+      <div class="caso">
+        <div class="cuadro">Foto del cliente</div>
+        <div class="linea-nombre">Luna</div>
+      </div>
+    </section>
+
+    <img
+      src="https://thumbs.dreamstime.com/b/british-flag-flag-united-kingdom-great-britain-illustration-state-symbol-british-flag-flag-united-kingdom-249074964.jpg"
+      alt="Idioma inglés">
+    </section>
+  </main>
+
+</body>
+
+</html>

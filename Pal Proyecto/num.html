@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números y Tablas - Juego Educativo Accesible</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Chilanka', 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent1: #FFD166;
+            --accent2: #06D6A0;
+            --accent3: #118AB2;
+            --accent4: #EF476F;
+            --dark: #073B4C;
+            --light: #F8F9FA;
+            --text-dark: #212529;
+            --text-light: #F8F9FA;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 16px;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent4));
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            color: var(--text-light);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .accessibility-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+        }
+
+        .accessibility-btn {
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .accessibility-btn:hover, .accessibility-btn:focus {
+            transform: scale(1.05);
+            background-color: var(--accent3);
+            outline: 3px solid var(--accent2);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .table-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 5px solid var(--accent1);
+        }
+
+        .section-title {
+            color: var(--dark);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .numbers-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0 auto;
+        }
+
+        .numbers-table th, .numbers-table td {
+            padding: 20px;
+            text-align: center;
+            border: 3px solid var(--light);
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .numbers-table th {
+            background-color: var(--secondary);
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+
+        .numbers-table td {
+            background-color: var(--light);
+            color: var(--text-dark);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .numbers-table td:hover, .numbers-table td:focus {
+            transform: scale(1.05);
+            z-index: 10;
+            outline: 4px solid var(--accent2);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Colores alternados para mejor contraste */
+        .numbers-table tr:nth-child(even) td {
+            background-color: #E9F5FF;
+        }
+
+        .numbers-table tr:nth-child(odd) td {
+            background-color: #FFF9E6;
+        }
+
+        .number-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .number-name {
+            font-size: 1.3rem;
+            color: var(--accent3);
+        }
+
+        .notes-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 5px solid var(--accent2);
+        }
+
+        .notes-list {
+            list-style-type: none;
+            margin-top: 20px;
+        }
+
+        .notes-list li {
+            background-color: var(--light);
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 8px solid var(--primary);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .notes-list li:hover {
+            transform: translateX(10px);
+            background-color: #FFEED9;
+        }
+
+        .notes-list i {
+            color: var(--accent4);
+            font-size: 1.5rem;
+        }
+
+        .interactive-zone {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+            border: 5px solid var(--accent3);
+            grid-column: 1 / -1;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            padding: 18px 25px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .control-btn:hover, .control-btn:focus {
+            transform: scale(1.05);
+            outline: 4px solid var(--accent1);
+        }
+
+        .btn-speak {
+            background-color: var(--accent4);
+            color: white;
+        }
+
+        .btn-high-contrast {
+            background-color: var(--dark);
+            color: white;
+        }
+
+        .btn-large-text {
+            background-color: var(--accent2);
+            color: var(--dark);
+        }
+
+        .feedback {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #E9F5FF;
+            border-radius: var(--border-radius);
+            border: 3px dashed var(--secondary);
+            font-size: 1.4rem;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .instructions {
+            background-color: #FFF9E6;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            border-left: 8px solid var(--accent1);
+            font-size: 1.2rem;
+        }
+
+        .instructions h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--dark);
+            font-size: 1.1rem;
+            border-top: 3px solid var(--secondary);
+        }
+
+        /* Modo alto contraste */
+        .high-contrast {
+            background-color: black;
+            color: yellow;
+        }
+
+        .high-contrast .header {
+            background: black;
+            color: yellow;
+            border: 3px solid yellow;
+        }
+
+        .high-contrast .table-container,
+        .high-contrast .notes-container,
+        .high-contrast .interactive-zone {
+            background-color: black;
+            color: yellow;
+            border-color: yellow;
+        }
+
+        .high-contrast .numbers-table td,
+        .high-contrast .numbers-table th {
+            background-color: black;
+            color: yellow;
+            border-color: yellow;
+        }
+
+        .high-contrast .notes-list li {
+            background-color: black;
+            color: yellow;
+            border-color: yellow;
+        }
+
+        /* Texto grande */
+        .large-text {
+            font-size: 1.4rem;
+        }
+
+        .large-text h1 {
+            font-size: 3.5rem;
+        }
+
+        .large-text .section-title {
+            font-size: 2.3rem;
+        }
+
+        .large-text .numbers-table th,
+        .large-text .numbers-table td {
+            font-size: 2rem;
+        }
+
+        .large-text .number {
+            font-size: 2.8rem;
+        }
+
+        /* Focus visible para accesibilidad */
+        button:focus, td:focus {
+            outline: 3px solid var(--accent2);
+            outline-offset: 2px;
+        }
+
+        /* Animación para feedback */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        /* Indicadores táctiles */
+        .tactile-indicator {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header" role="banner">
+        <h1><i class="fas fa-star"></i> Números y Tablas <i class="fas fa-star"></i></h1>
+        <p class="subtitle">Juego educativo accesible para todos los niños</p>
+        
+        <div class="accessibility-bar" role="toolbar" aria-label="Herramientas de accesibilidad">
+            <button class="accessibility-btn" id="highContrastBtn" aria-label="Activar modo alto contraste">
+                <i class="fas fa-adjust"></i> Alto Contraste
+            </button>
+            <button class="accessibility-btn" id="largeTextBtn" aria-label="Aumentar tamaño de texto">
+                <i class="fas fa-text-height"></i> Texto Grande
+            </button>
+            <button class="accessibility-btn" id="speakAllBtn" aria-label="Escuchar todos los números">
+                <i class="fas fa-volume-up"></i> Leer Todo
+            </button>
+            <button class="accessibility-btn" id="resetBtn" aria-label="Restablecer configuración">
+                <i class="fas fa-redo"></i> Reiniciar
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content" role="main">
+        <section class="table-container" aria-labelledby="table-title">
+            <h2 id="table-title" class="section-title"><i class="fas fa-table"></i> Tabla de Números</h2>
+            <table class="numbers-table" role="grid" aria-label="Tabla de números del 1 al 13 con sus nombres en inglés">
+                <thead>
+                    <tr>
+                        <th scope="col">Número</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td tabindex="0" role="gridcell" aria-label="Número 1, one">
+                            <div class="number-cell">
+                                <span class="number">1</span>
+                                <span class="number-name">One</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 2, two">
+                            <div class="number-cell">
+                                <span class="number">2</span>
+                                <span class="number-name">Two</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 3, three">
+                            <div class="number-cell">
+                                <span class="number">3</span>
+                                <span class="number-name">Three</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 4, four">
+                            <div class="number-cell">
+                                <span class="number">4</span>
+                                <span class="number-name">Four</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 5, five">
+                            <div class="number-cell">
+                                <span class="number">5</span>
+                                <span class="number-name">Five</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 6, four / seven">
+                            <div class="number-cell">
+                                <span class="number">6</span>
+                                <span class="number-name">Four / Seven</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tabindex="0" role="gridcell" aria-label="Número 8, eight">
+                            <div class="number-cell">
+                                <span class="number">8</span>
+                                <span class="number-name">Eight</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 9, nine">
+                            <div class="number-cell">
+                                <span class="number">9</span>
+                                <span class="number-name">Nine</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 10, ten">
+                            <div class="number-cell">
+                                <span class="number">10</span>
+                                <span class="number-name">Ten</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 11, eleven">
+                            <div class="number-cell">
+                                <span class="number">11</span>
+                                <span class="number-name">Eleven</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 12, twelve">
+                            <div class="number-cell">
+                                <span class="number">12</span>
+                                <span class="number-name">Twelve</span>
+                            </div>
+                        </td>
+                        <td tabindex="0" role="gridcell" aria-label="Número 13, thirteen">
+                            <div class="number-cell">
+                                <span class="number">13</span>
+                                <span class="number-name">Thirteen</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="notes-container" aria-labelledby="notes-title">
+            <h2 id="notes-title" class="section-title"><i class="fas fa-sticky-note"></i> Notas Especiales</h2>
+            <ul class="notes-list" role="list">
+                <li role="listitem"><i class="fas fa-water"></i> <strong>Lunes</strong></li>
+                <li role="listitem"><i class="fas fa-water"></i> <strong>Martes</strong></li>
+                <li role="listitem"><i class="fas fa-user-friends"></i> <strong>Miercoles</strong></li>
+                <li role="listitem"><i class="fas fa-user-friends"></i> <strong>Viernes</strong></li>
+                <li role="listitem"><i class="fas fa-umbrella-beach"></i> <strong>Sabado</strong></li>
+                <li role="listitem"><i class="fas fa-sun"></i> <strong>Domingo</strong></li>
+                <li role="listitem"><i class="fas fa-party-horn"></i> <strong>Monday</strong></li>
+                <li role="listitem"><i class="fas fa-running"></i> <strong>Tuesday</strong></li>
+                <li role="listitem"><i class="fas fa-church"></i> <strong>wednesday</strong></li>
+                <li role="listitem"><i class="fas fa-church"></i> <strong>Thursday</strong></li>
+                <li role="listitem"><i class="fas fa-church"></i> <strong>Friday</strong></li>
+                <li role="listitem"><i class="fas fa-church"></i> <strong>Saturday</strong></li>
+                <li role="listitem"><i class="fas fa-church"></i> <strong>Sunday</strong></li>
+            </ul>
+        </section>
+
+        <section class="interactive-zone" aria-labelledby="interactive-title">
+            <h2 id="interactive-title" class="section-title"><i class="fas fa-gamepad"></i> Zona Interactiva</h2>
+            
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> Instrucciones para usar esta página:</h3>
+                <p>1. Haz clic o toca cualquier número para escucharlo.</p>
+                <p>2. Usa los botones de accesibilidad para ajustar la página a tus necesidades.</p>
+                <p>3. Presiona la tecla Tab para navegar entre los elementos.</p>
+                <p>4. Cada elemento tiene una descripción para lectores de pantalla.</p>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn btn-speak" id="speakNumbersBtn">
+                    <i class="fas fa-volume-up"></i> Escuchar Números
+                </button>
+                <button class="control-btn btn-high-contrast" id="toggleColorsBtn">
+                    <i class="fas fa-palette"></i> Cambiar Colores
+                </button>
+                <button class="control-btn btn-large-text" id="vibrateBtn">
+                    <i class="fas fa-mobile-alt"></i> Efecto de Vibración
+                </button>
+            </div>
+            
+            <div class="feedback" id="feedback" role="status" aria-live="polite">
+                <p>¡Hola! Toca un número o usa los botones para comenzar.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <p><i class="fas fa-universal-access"></i> Página diseñada para ser accesible para niños con discapacidad visual y auditiva</p>
+        <p>Usa los controles para ajustar la experiencia a tus necesidades</p>
+    </footer>
+
+    <script>
+        // Elementos DOM importantes
+        const highContrastBtn = document.getElementById('highContrastBtn');
+        const largeTextBtn = document.getElementById('largeTextBtn');
+        const speakAllBtn = document.getElementById('speakAllBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const speakNumbersBtn = document.getElementById('speakNumbersBtn');
+        const toggleColorsBtn = document.getElementById('toggleColorsBtn');
+        const vibrateBtn = document.getElementById('vibrateBtn');
+        const feedback = document.getElementById('feedback');
+        const numberCells = document.querySelectorAll('.numbers-table td');
+        
+        // Para síntesis de voz
+        const speech = window.speechSynthesis;
+        
+        // Colores para alternar
+        const colorSchemes = [
+            { primary: '#FF6B6B', secondary: '#4ECDC4', accent1: '#FFD166', accent2: '#06D6A0', accent3: '#118AB2', accent4: '#EF476F' },
+            { primary: '#9B5DE5', secondary: '#F15BB5', accent1: '#FEE440', accent2: '#00BBF9', accent3: '#00F5D4', accent4: '#FF8C42' },
+            { primary: '#2A9D8F', secondary: '#E9C46A', accent1: '#F4A261', accent2: '#E76F51', accent3: '#264653', accent4: '#8AB17D' }
+        ];
+        let currentColorScheme = 0;
+        
+        // Función para hablar texto
+        function speakText(text) {
+            if (speech.speaking) {
+                speech.cancel();
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-ES';
+            utterance.rate = 0.9;
+            utterance.pitch = 1.2;
+            utterance.volume = 1;
+            
+            // Para inglés
+            if (text.includes('one') || text.includes('two') || text.includes('three') || 
+                text.includes('four') || text.includes('five') || text.includes('six') || 
+                text.includes('seven') || text.includes('eight') || text.includes('nine') || 
+                text.includes('ten') || text.includes('eleven') || text.includes('twelve') || 
+                text.includes('thirteen')) {
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+            }
+            
+            speech.speak(utterance);
+            showFeedback(`Hablando: ${text}`);
+        }
+        
+        // Función para mostrar retroalimentación
+        function showFeedback(message) {
+            feedback.innerHTML = `<p>${message}</p>`;
+            feedback.classList.add('pulse');
+            setTimeout(() => {
+                feedback.classList.remove('pulse');
+            }, 500);
+        }
+        
+        // Hablar número al hacer clic
+        numberCells.forEach(cell => {
+            cell.addEventListener('click', function() {
+                const number = this.querySelector('.number').textContent;
+                const name = this.querySelector('.number-name').textContent;
+                const label = this.getAttribute('aria-label');
+                speakText(`${number}, ${name}`);
+                
+                // Efecto visual
+                this.style.backgroundColor = '#FFEED9';
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                }, 500);
+            });
+            
+            // También activar con teclado (Enter o espacio)
+            cell.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+        
+        // Modo alto contraste
+        highContrastBtn.addEventListener('click', function() {
+            document.body.classList.toggle('high-contrast');
+            const isActive = document.body.classList.contains('high-contrast');
+            showFeedback(isActive ? 'Modo alto contraste activado' : 'Modo alto contraste desactivado');
+            this.setAttribute('aria-pressed', isActive);
+        });
+        
+        // Texto grande
+        largeTextBtn.addEventListener('click', function() {
+            document.body.classList.toggle('large-text');
+            const isActive = document.body.classList.contains('large-text');
+            showFeedback(isActive ? 'Texto grande activado' : 'Texto grande desactivado');
+            this.setAttribute('aria-pressed', isActive);
+        });
+        
+        // Leer todos los números
+        speakAllBtn.addEventListener('click', function() {
+            let numbersText = '';
+            numberCells.forEach(cell => {
+                const number = cell.querySelector('.number').textContent;
+                const name = cell.querySelector('.number-name').textContent;
+                numbersText += `${number}, ${name}. `;
+            });
+            speakText(numbersText);
+            showFeedback('Leyendo todos los números');
+        });
+        
+        // Leer números en secuencia
+        speakNumbersBtn.addEventListener('click', function() {
+            let numbersText = 'Números del 1 al 13: ';
+            for (let i = 0; i < numberCells.length; i++) {
+                const cell = numberCells[i];
+                const number = cell.querySelector('.number').textContent;
+                const name = cell.querySelector('.number-name').textContent;
+                numbersText += `${number}, ${name}. `;
+            }
+            speakText(numbersText);
+            showFeedback('Reproduciendo secuencia de números');
+        });
+        
+        // Cambiar esquema de colores
+        toggleColorsBtn.addEventListener('click', function() {
+            currentColorScheme = (currentColorScheme + 1) % colorSchemes.length;
+            const colors = colorSchemes[currentColorScheme];
+            
+            document.documentElement.style.setProperty('--primary', colors.primary);
+            document.documentElement.style.setProperty('--secondary', colors.secondary);
+            document.documentElement.style.setProperty('--accent1', colors.accent1);
+            document.documentElement.style.setProperty('--accent2', colors.accent2);
+            document.documentElement.style.setProperty('--accent3', colors.accent3);
+            document.documentElement.style.setProperty('--accent4', colors.accent4);
+            
+            showFeedback(`Esquema de colores ${currentColorScheme + 1} activado`);
+        });
+        
+        // Efecto de vibración (simulado)
+        vibrateBtn.addEventListener('click', function() {
+            // Para navegadores móviles que soportan vibración
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            // Efecto visual de vibración
+            document.body.style.transform = 'translateX(5px)';
+            setTimeout(() => {
+                document.body.style.transform = 'translateX(-5px)';
+                setTimeout(() => {
+                    document.body.style.transform = 'translateX(0)';
+                }, 50);
+            }, 50);
+            
+            showFeedback('¡Efecto de vibración activado!');
+        });
+        
+        // Reiniciar configuración
+        resetBtn.addEventListener('click', function() {
+            document.body.classList.remove('high-contrast', 'large-text');
+            
+            // Restaurar colores originales
+            const originalColors = colorSchemes[0];
+            document.documentElement.style.setProperty('--primary', originalColors.primary);
+            document.documentElement.style.setProperty('--secondary', originalColors.secondary);
+            document.documentElement.style.setProperty('--accent1', originalColors.accent1);
+            document.documentElement.style.setProperty('--accent2', originalColors.accent2);
+            document.documentElement.style.setProperty('--accent3', originalColors.accent3);
+            document.documentElement.style.setProperty('--accent4', originalColors.accent4);
+            currentColorScheme = 0;
+            
+            showFeedback('Configuración restablecida');
+        });
+        
+        // Inicializar atributos ARIA para botones toggle
+        highContrastBtn.setAttribute('aria-pressed', 'false');
+        largeTextBtn.setAttribute('aria-pressed', 'false');
+        
+        // Mensaje inicial
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                showFeedback('¡Bienvenido! Explora los números y notas con los botones o tocando directamente.');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

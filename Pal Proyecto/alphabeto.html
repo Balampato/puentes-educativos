@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfabeto Inglés - Inglés Inclusivo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        /* Barra de navegación mejorada */
+        .navbar {
+            background: linear-gradient(90deg, #2563eb, #4f46e5, #7c3aed);
+            padding: 20px 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar h2 {
+            color: white;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar h2 i {
+            font-size: 32px;
+            color: #ffcc00;
+        }
+
+        .back-button {
+            background-color: #ffcc00;
+            color: #1e293b;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            background-color: #ffd633;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .back-button:focus {
+            outline: 4px solid white;
+            outline-offset: 2px;
+        }
+
+        /* Controles de accesibilidad */
+        .accessibility-controls {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 4px solid #ffcc00;
+        }
+
+        .accessibility-btn {
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .accessibility-btn:hover {
+            background-color: #3730a3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .accessibility-btn:focus {
+            outline: 4px solid #ffcc00;
+            outline-offset: 2px;
+        }
+
+        /* Título principal */
+        h1 {
+            text-align: center;
+            margin: 40px 0 30px;
+            font-size: 48px;
+            color: white;
+            text-shadow: 3px 3px 0 #1e293b, 5px 5px 0 rgba(255, 204, 0, 0.5);
+            padding: 0 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 40px;
+            font-style: italic;
+            background-color: rgba(30, 41, 59, 0.7);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            border: 3px dashed #ffcc00;
+        }
+
+        /* Contenedor del alfabeto */
+        .alphabet {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 25px;
+            padding: 0 40px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Tarjetas de letras mejoradas */
+        .card {
+            border-radius: 20px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 6px solid white;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:focus {
+            outline: 6px solid #ffcc00;
+            outline-offset: 4px;
+        }
+
+        .card:active {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* Indicador de audio en las tarjetas */
+        .audio-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #1e293b;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Texto de la palabra ejemplo */
+        .word-example {
+            font-size: 20px;
+            font-weight: normal;
+            margin-top: 10px;
+            text-align: center;
+            padding: 0 10px;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Más colores para las tarjetas */
+        .c1  { background: linear-gradient(135deg, #ef4444, #f87171); }
+        .c2  { background: linear-gradient(135deg, #f97316, #fb923c); }
+        .c3  { background: linear-gradient(135deg, #eab308, #facc15); }
+        .c4  { background: linear-gradient(135deg, #22c55e, #4ade80); }
+        .c5  { background: linear-gradient(135deg, #14b8a6, #2dd4bf); }
+        .c6  { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+        .c7  { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .c8  { background: linear-gradient(135deg, #6366f1, #818cf8); }
+        .c9  { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .c10 { background: linear-gradient(135deg, #a855f7, #c084fc); }
+        .c11 { background: linear-gradient(135deg, #ec4899, #f472b6); }
+        .c12 { background: linear-gradient(135deg, #f43f5e, #fb7185); }
+        .c13 { background: linear-gradient(135deg, #84cc16, #a3e635); }
+        .c14 { background: linear-gradient(135deg, #10b981, #34d399); }
+        .c15 { background: linear-gradient(135deg, #0ea5e9, #38bdf8); }
+        .c16 { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .c17 { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .c18 { background: linear-gradient(135deg, #84cc16, #a3e635); }
+        .c19 { background: linear-gradient(135deg, #10b981, #34d399); }
+        .c20 { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .c21 { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .c22 { background: linear-gradient(135deg, #ec4899, #f472b6); }
+        .c23 { background: linear-gradient(135deg, #f97316, #fb923c); }
+        .c24 { background: linear-gradient(135deg, #eab308, #facc15); }
+        .c25 { background: linear-gradient(135deg, #22c55e, #4ade80); }
+        .c26 { background: linear-gradient(135deg, #14b8a6, #2dd4bf); }
+
+        /* Información adicional */
+        .alphabet-info {
+            background-color: rgba(255, 255, 255, 0.95);
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 5px solid #ffcc00;
+        }
+
+        .alphabet-info h3 {
+            color: #1e293b;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 4px solid #4f46e5;
+            padding-bottom: 15px;
+        }
+
+        .alphabet-info p {
+            color: #475569;
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .highlight {
+            background-color: #e0e7ff;
+            padding: 5px 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        /* Modo alto contraste */
+        .alto-contraste {
+            background: #000 !important;
+        }
+
+        .alto-contraste .card {
+            border-color: #ffff00 !important;
+            box-shadow: 0 0 0 3px #ffff00 !important;
+        }
+
+        .alto-contraste .navbar {
+            background: #000 !important;
+            border-bottom: 4px solid #ffff00;
+        }
+
+        .alto-contraste .alphabet-info {
+            background-color: #000 !important;
+            color: #fff !important;
+            border-color: #ffff00 !important;
+        }
+
+        .alto-contraste .alphabet-info h3,
+        .alto-contraste .alphabet-info p {
+            color: #fff !important;
+        }
+
+        /* Texto grande */
+        .texto-grande .card {
+            font-size: 80px;
+            height: 200px;
+        }
+
+        .texto-grande .word-example {
+            font-size: 26px;
+        }
+
+        .texto-grande h1 {
+            font-size: 56px;
+        }
+
+        .texto-grande .subtitle {
+            font-size: 28px;
+        }
+
+        /* Mensaje de accesibilidad */
+        .accessibility-message {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #4f46e5;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            max-width: 350px;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .alphabet {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .alphabet {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            h1 {
+                font-size: 40px;
+            }
+            
+            .card {
+                height: 140px;
+                font-size: 56px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .alphabet {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                padding: 0 20px 30px;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px;
+            }
+            
+            .accessibility-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .accessibility-btn {
+                width: 90%;
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 36px;
+                margin: 30px 0 20px;
+            }
+            
+            .subtitle {
+                font-size: 20px;
+                padding: 10px 20px;
+            }
+            
+            .card {
+                height: 120px;
+                font-size: 48px;
+            }
+            
+            .word-example {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .alphabet {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .card {
+                height: 110px;
+                font-size: 42px;
+            }
+        }
+
+        /* Animación de pulso para elementos activos */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <h2><i class="fas fa-language"></i> Alfabeto Inglés</h2>
+        <button class="back-button" onclick="window.location.href='index.html'" aria-label="Volver a la página principal">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </button>
+    </div>
+
+    <!-- Controles de accesibilidad -->
+    <div class="accessibility-controls">
+        <button class="accessibility-btn" id="highContrastBtn" aria-label="Activar modo alto contraste">
+            <i class="fas fa-adjust"></i> Alto Contraste
+        </button>
+        <button class="accessibility-btn" id="largeTextBtn" aria-label="Aumentar tamaño de texto">
+            <i class="fas fa-text-height"></i> Texto Grande
+        </button>
+        <button class="accessibility-btn" id="speakAlphabetBtn" aria-label="Escuchar el alfabeto completo">
+            <i class="fas fa-volume-up"></i> Escuchar Alfabeto
+        </button>
+        <button class="accessibility-btn" id="stopAudioBtn" aria-label="Detener audio">
+            <i class="fas fa-stop-circle"></i> Detener Audio
+        </button>
+    </div>
+
+    <!-- Título principal -->
+    <h1>English Alphabet</h1>
+    <div class="subtitle">Aprende el alfabeto inglés con ejemplos y sonidos</div>
+
+    <!-- Alfabeto -->
+    <div class="alphabet">
+        <!-- Letras A-F -->
+        <div class="card c1" tabindex="0" onclick="speakLetter('A', 'Apple')" onkeydown="if(event.key==='Enter') speakLetter('A', 'Apple')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            A
+            <div class="word-example">Apple</div>
+        </div>
+        
+        <div class="card c2" tabindex="0" onclick="speakLetter('B', 'Ball')" onkeydown="if(event.key==='Enter') speakLetter('B', 'Ball')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            B
+            <div class="word-example">Ball</div>
+        </div>
+        
+        <div class="card c3" tabindex="0" onclick="speakLetter('C', 'Cat')" onkeydown="if(event.key==='Enter') speakLetter('C', 'Cat')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            C
+            <div class="word-example">Cat</div>
+        </div>
+        
+        <div class="card c4" tabindex="0" onclick="speakLetter('D', 'Dog')" onkeydown="if(event.key==='Enter') speakLetter('D', 'Dog')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            D
+            <div class="word-example">Dog</div>
+        </div>
+        
+        <div class="card c5" tabindex="0" onclick="speakLetter('E', 'Elephant')" onkeydown="if(event.key==='Enter') speakLetter('E', 'Elephant')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            E
+            <div class="word-example">Elephant</div>
+        </div>
+        
+        <div class="card c6" tabindex="0" onclick="speakLetter('F', 'Fish')" onkeydown="if(event.key==='Enter') speakLetter('F', 'Fish')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            F
+            <div class="word-example">Fish</div>
+        </div>
+
+        <!-- Letras G-L -->
+        <div class="card c7" tabindex="0" onclick="speakLetter('G', 'Giraffe')" onkeydown="if(event.key==='Enter') speakLetter('G', 'Giraffe')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            G
+            <div class="word-example">Giraffe</div>
+        </div>
+        
+        <div class="card c8" tabindex="0" onclick="speakLetter('H', 'House')" onkeydown="if(event.key==='Enter') speakLetter('H', 'House')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            H
+            <div class="word-example">House</div>
+        </div>
+        
+        <div class="card c9" tabindex="0" onclick="speakLetter('I', 'Ice Cream')" onkeydown="if(event.key==='Enter') speakLetter('I', 'Ice Cream')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            I
+            <div class="word-example">Ice Cream</div>
+        </div>
+        
+        <div class="card c10" tabindex="0" onclick="speakLetter('J', 'Juice')" onkeydown="if(event.key==='Enter') speakLetter('J', 'Juice')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            J
+            <div class="word-example">Juice</div>
+        </div>
+        
+        <div class="card c11" tabindex="0" onclick="speakLetter('K', 'Kite')" onkeydown="if(event.key==='Enter') speakLetter('K', 'Kite')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            K
+            <div class="word-example">Kite</div>
+        </div>
+        
+        <div class="card c12" tabindex="0" onclick="speakLetter('L', 'Lion')" onkeydown="if(event.key==='Enter') speakLetter('L', 'Lion')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            L
+            <div class="word-example">Lion</div>
+        </div>
+
+        <!-- Letras M-R -->
+        <div class="card c13" tabindex="0" onclick="speakLetter('M', 'Monkey')" onkeydown="if(event.key==='Enter') speakLetter('M', 'Monkey')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            M
+            <div class="word-example">Monkey</div>
+        </div>
+        
+        <div class="card c14" tabindex="0" onclick="speakLetter('N', 'Nest')" onkeydown="if(event.key==='Enter') speakLetter('N', 'Nest')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            N
+            <div class="word-example">Nest</div>
+        </div>
+        
+        <div class="card c15" tabindex="0" onclick="speakLetter('O', 'Orange')" onkeydown="if(event.key==='Enter') speakLetter('O', 'Orange')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            O
+            <div class="word-example">Orange</div>
+        </div>
+        
+        <div class="card c16" tabindex="0" onclick="speakLetter('P', 'Pencil')" onkeydown="if(event.key==='Enter') speakLetter('P', 'Pencil')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            P
+            <div class="word-example">Pencil</div>
+        </div>
+        
+        <div class="card c17" tabindex="0" onclick="speakLetter('Q', 'Queen')" onkeydown="if(event.key==='Enter') speakLetter('Q', 'Queen')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            Q
+            <div class="word-example">Queen</div>
+        </div>
+        
+        <div class="card c18" tabindex="0" onclick="speakLetter('R', 'Rainbow')" onkeydown="if(event.key==='Enter') speakLetter('R', 'Rainbow')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            R
+            <div class="word-example">Rainbow</div>
+        </div>
+
+        <!-- Letras S-X -->
+        <div class="card c19" tabindex="0" onclick="speakLetter('S', 'Sun')" onkeydown="if(event.key==='Enter') speakLetter('S', 'Sun')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            S
+            <div class="word-example">Sun</div>
+        </div>
+        
+        <div class="card c20" tabindex="0" onclick="speakLetter('T', 'Tree')" onkeydown="if(event.key==='Enter') speakLetter('T', 'Tree')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            T
+            <div class="word-example">Tree</div>
+        </div>
+        
+        <div class="card c21" tabindex="0" onclick="speakLetter('U', 'Umbrella')" onkeydown="if(event.key==='Enter') speakLetter('U', 'Umbrella')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            U
+            <div class="word-example">Umbrella</div>
+        </div>
+        
+        <div class="card c22" tabindex="0" onclick="speakLetter('V', 'Violin')" onkeydown="if(event.key==='Enter') speakLetter('V', 'Violin')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            V
+            <div class="word-example">Violin</div>
+        </div>
+        
+        <div class="card c23" tabindex="0" onclick="speakLetter('W', 'Watermelon')" onkeydown="if(event.key==='Enter') speakLetter('W', 'Watermelon')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            W
+            <div class="word-example">Watermelon</div>
+        </div>
+        
+        <div class="card c24" tabindex="0" onclick="speakLetter('X', 'Xylophone')" onkeydown="if(event.key==='Enter') speakLetter('X', 'Xylophone')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            X
+            <div class="word-example">Xylophone</div>
+        </div>
+
+        <!-- Letras Y-Z -->
+        <div class="card c25" tabindex="0" onclick="speakLetter('Y', 'Yoyo')" onkeydown="if(event.key==='Enter') speakLetter('Y', 'Yoyo')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            Y
+            <div class="word-example">Yoyo</div>
+        </div>
+        
+        <div class="card c26" tabindex="0" onclick="speakLetter('Z', 'Zebra')" onkeydown="if(event.key==='Enter') speakLetter('Z', 'Zebra')">
+            <div class="audio-indicator" aria-label="Esta letra tiene audio">🔊</div>
+            Z
+            <div class="word-example">Zebra</div>
+        </div>
+    </div>
+
+    <!-- Información adicional -->
+    <div class="alphabet-info">
+        <h3><i class="fas fa-lightbulb"></i> ¿Sabías que?</h3>
+        <p>El alfabeto inglés tiene <span class="highlight">26 letras</span>: 5 vocales (A, E, I, O, U) y 21 consonantes.</p>
+        <p>Cada letra tiene un <span class="highlight">sonido diferente</span> en inglés. Por ejemplo, la "A" se pronuncia "ei".</p>
+        <p>Para aprender mejor, <span class="highlight">repite en voz alta</span> cada letra y palabra después de escucharla.</p>
+        <p>¡Practica todos los días y pronto serás un experto en el alfabeto inglés!</p>
+    </div>
+
+    <!-- Mensaje de accesibilidad -->
+    <div class="accessibility-message" id="accessibilityMessage" aria-live="polite"></div>
+
+    <script>
+        // Variables globales
+        let audioActivo = true;
+        let altoContrasteActivo = false;
+        let textoGrandeActivo = false;
+        let vozActual = null;
+
+        // Función para hablar una letra
+        function speakLetter(letra, palabraEjemplo) {
+            if ("speechSynthesis" in window && audioActivo) {
+                // Detener cualquier audio anterior
+                speechSynthesis.cancel();
+                
+                // Crear el mensaje
+                const mensaje = new SpeechSynthesisUtterance();
+                mensaje.text = `La letra ${letra}. En inglés: ${letra}. Ejemplo: ${palabraEjemplo}`;
+                mensaje.lang = "es-ES";
+                mensaje.rate = 0.9;
+                mensaje.pitch = 1.2;
+                mensaje.volume = 1;
+                
+                // Intentar encontrar una voz amigable
+                const voces = speechSynthesis.getVoices();
+                const vozAmigable = voces.find(v => v.lang === 'es-ES' && v.name.includes('Female')) || 
+                                  voces.find(v => v.lang === 'es-ES');
+                
+                if (vozAmigable) {
+                    mensaje.voice = vozAmigable;
+                }
+                
+                vozActual = mensaje;
+                speechSynthesis.speak(mensaje);
+                
+                // Mostrar mensaje visual
+                showAccessibilityMessage(`🔊 Letra: ${letra} - Ejemplo: ${palabraEjemplo}`);
+                
+                // Efecto visual para la tarjeta
+                const elemento = event.currentTarget || event.target.closest('.card');
+                if (elemento) {
+                    elemento.classList.add('pulse');
+                    elemento.style.boxShadow = '0 0 0 5px #ffcc00, 0 15px 30px rgba(0, 0, 0, 0.3)';
+                    
+                    setTimeout(() => {
+                        elemento.classList.remove('pulse');
+                        elemento.style.boxShadow = '';
+                    }, 500);
+                }
+            }
+        }
+
+        // Función para hablar todo el alfabeto
+        function speakAlphabet() {
+            if ("speechSynthesis" in window && audioActivo) {
+                speechSynthesis.cancel();
+                
+                const alfabeto = [
+                    {letra: "A", palabra: "Apple"},
+                    {letra: "B", palabra: "Ball"},
+                    {letra: "C", palabra: "Cat"},
+                    {letra: "D", palabra: "Dog"},
+                    {letra: "E", palabra: "Elephant"},
+                    {letra: "F", palabra: "Fish"},
+                    {letra: "G", palabra: "Giraffe"},
+                    {letra: "H", palabra: "House"},
+                    {letra: "I", palabra: "Ice Cream"},
+                    {letra: "J", palabra: "Juice"},
+                    {letra: "K", palabra: "Kite"},
+                    {letra: "L", palabra: "Lion"},
+                    {letra: "M", palabra: "Monkey"},
+                    {letra: "N", palabra: "Nest"},
+                    {letra: "O", palabra: "Orange"},
+                    {letra: "P", palabra: "Pencil"},
+                    {letra: "Q", palabra: "Queen"},
+                    {letra: "R", palabra: "Rainbow"},
+                    {letra: "S", palabra: "Sun"},
+                    {letra: "T", palabra: "Tree"},
+                    {letra: "U", palabra: "Umbrella"},
+                    {letra: "V", palabra: "Violin"},
+                    {letra: "W", palabra: "Watermelon"},
+                    {letra: "X", palabra: "Xylophone"},
+                    {letra: "Y", palabra: "Yoyo"},
+                    {letra: "Z", palabra: "Zebra"}
+                ];
+                
+                let textoCompleto = "Vamos a repasar el alfabeto inglés. ";
+                alfabeto.forEach(item => {
+                    textoCompleto += `Letra ${item.letra}. Ejemplo: ${item.palabra}. `;
+                });
+                textoCompleto += "¡Muy bien! Has repasado todo el alfabeto inglés.";
+                
+                const mensaje = new SpeechSynthesisUtterance();
+                mensaje.text = textoCompleto;
+                mensaje.lang = "es-ES";
+                mensaje.rate = 0.8;
+                mensaje.pitch = 1.2;
+                mensaje.volume = 1;
+                
+                vozActual = mensaje;
+                speechSynthesis.speak(mensaje);
+                
+                showAccessibilityMessage("🔊 Repasando el alfabeto completo...");
+            }
+        }
+
+        // Función para detener el audio
+        function stopAudio() {
+            if ("speechSynthesis" in window) {
+                speechSynthesis.cancel();
+                vozActual = null;
+                showAccessibilityMessage("⏹️ Audio detenido");
+            }
+        }
+
+        // Mostrar mensaje de accesibilidad
+        function showAccessibilityMessage(texto) {
+            const mensajeDiv = document.getElementById('accessibilityMessage');
+            mensajeDiv.textContent = texto;
+            mensajeDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                mensajeDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Alternar alto contraste
+        document.getElementById('highContrastBtn').addEventListener('click', function() {
+            altoContrasteActivo = !altoContrasteActivo;
+            
+            if (altoContrasteActivo) {
+                document.body.classList.add('alto-contraste');
+                this.innerHTML = '<i class="fas fa-adjust"></i> Contraste Normal';
+                this.setAttribute('aria-label', 'Desactivar modo alto contraste');
+                showAccessibilityMessage('🎨 Modo alto contraste activado');
+                
+                if (audioActivo) {
+                    const mensaje = new SpeechSynthesisUtterance();
+                    mensaje.text = "Modo alto contraste activado. Los colores ahora tienen más contraste para mejor visibilidad.";
+                    mensaje.lang = "es-ES";
+                    speechSynthesis.speak(mensaje);
+                }
+            } else {
+                document.body.classList.remove('alto-contraste');
+                this.innerHTML = '<i class="fas fa-adjust"></i> Alto Contraste';
+                this.setAttribute('aria-label', 'Activar modo alto contraste');
+                showAccessibilityMessage('🎨 Modo alto contraste desactivado');
+            }
+        });
+
+        // Alternar texto grande
+        document.getElementById('largeTextBtn').addEventListener('click', function() {
+            textoGrandeActivo = !textoGrandeActivo;
+            
+            if (textoGrandeActivo) {
+                document.body.classList.add('texto-grande');
+                this.innerHTML = '<i class="fas fa-text-height"></i> Texto Normal';
+                this.setAttribute('aria-label', 'Reducir tamaño de texto');
+                showAccessibilityMessage('🔍 Texto grande activado');
+                
+                if (audioActivo) {
+                    const mensaje = new SpeechSynthesisUtterance();
+                    mensaje.text = "Texto grande activado. Las letras ahora son más grandes para mejor visibilidad.";
+                    mensaje.lang = "es-ES";
+                    speechSynthesis.speak(mensaje);
+                }
+            } else {
+                document.body.classList.remove('texto-grande');
+                this.innerHTML = '<i class="fas fa-text-height"></i> Texto Grande';
+                this.setAttribute('aria-label', 'Aumentar tamaño de texto');
+                showAccessibilityMessage('🔍 Texto grande desactivado');
+            }
+        });
+
+        // Configurar botón para hablar todo el alfabeto
+        document.getElementById('speakAlphabetBtn').addEventListener('click', speakAlphabet);
+        
+        // Configurar botón para detener audio
+        document.getElementById('stopAudioBtn').addEventListener('click', stopAudio);
+
+        // Inicialización
+        window.addEventListener('DOMContentLoaded', function() {
+            // Cargar voces para el narrador
+            setTimeout(() => {
+                speechSynthesis.getVoices();
+            }, 500);
+            
+            // Activar audio automáticamente
+            audioActivo = true;
+            
+            // Mensaje de bienvenida
+            setTimeout(() => {
+                if (audioActivo) {
+                    const mensaje = new SpeechSynthesisUtterance();
+                    mensaje.text = "Bienvenido al alfabeto inglés. Haz clic en cualquier letra para escuchar su nombre y un ejemplo. Usa los botones de arriba para ajustar la accesibilidad.";
+                    mensaje.lang = "es-ES";
+                    mensaje.rate = 0.9;
+                    mensaje.pitch = 1.2;
+                    speechSynthesis.speak(mensaje);
+                    
+                    showAccessibilityMessage("🔤 Bienvenido al alfabeto inglés");
+                }
+            }, 1000);
+            
+            // Configurar navegación por teclado
+            document.addEventListener('keydown', function(e) {
+                // Atajo para alto contraste: Alt + C
+                if (e.altKey && e.key === 'c') {
+                    e.preventDefault();
+                    document.getElementById('highContrastBtn').click();
+                }
+                
+                // Atajo para texto grande: Alt + T
+                if (e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    document.getElementById('largeTextBtn').click();
+                }
+                
+                // Atajo para hablar alfabeto: Alt + A
+                if (e.altKey && e.key === 'a') {
+                    e.preventDefault();
+                    speakAlphabet();
+                }
+                
+                // Atajo para detener audio: Alt + S
+                if (e.altKey && e.key === 's') {
+                    e.preventDefault();
+                    stopAudio();
+                }
+            });
+            
+            // Hacer que las tarjetas sean más interactivas
+            const tarjetas = document.querySelectorAll('.card');
+            tarjetas.forEach(tarjeta => {
+                tarjeta.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('pulse')) {
+                        this.style.transform = 'translateY(-10px) scale(1.05)';
+                    }
+                });
+                
+                tarjeta.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('pulse')) {
+                        this.style.transform = '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

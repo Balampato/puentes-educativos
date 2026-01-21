@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lugares de Casa - Juego Educativo Accesible</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Chilanka', 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --primary: #FF9A76;
+            --secondary: #5DADE2;
+            --accent1: #F7DC6F;
+            --accent2: #82E0AA;
+            --accent3: #BB8FCE;
+            --accent4: #F1948A;
+            --dark: #1A5276;
+            --light: #FEF9E7;
+            --text-dark: #2C3E50;
+            --text-light: #FEF9E7;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 20px;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 200, 124, 0.2) 0%, rgba(255, 255, 255, 0) 90%);
+        }
+
+        .header {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--accent3));
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .accessibility-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .accessibility-btn {
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .accessibility-btn:hover, .accessibility-btn:focus {
+            transform: scale(1.05);
+            background-color: var(--accent2);
+            color: var(--dark);
+            outline: 3px solid var(--accent1);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .places-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 6px solid var(--accent1);
+            grid-column: 1;
+        }
+
+        @media (min-width: 900px) {
+            .places-container {
+                grid-column: 1 / span 2;
+            }
+        }
+
+        .section-title {
+            color: var(--dark);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 4px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .place-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 18px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border: 4px solid transparent;
+            transition: all 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .place-card:hover, .place-card:focus {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent2);
+            outline: none;
+        }
+
+        .place-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--accent3));
+        }
+
+        .place-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .place-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .place-desc {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        .panels-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 6px solid var(--accent2);
+        }
+
+        .panel-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 10px solid var(--accent4);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .panel-card:hover, .panel-card:focus {
+            transform: translateX(10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            outline: none;
+        }
+
+        .panel-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel-desc {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .interactive-zone {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+            border: 6px solid var(--accent3);
+            grid-column: 1 / -1;
+        }
+
+        .house-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #E8F6F3;
+            border-radius: var(--border-radius);
+            min-height: 200px;
+        }
+
+        .house {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .house-roof {
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid var(--accent4);
+            margin: 0 auto;
+        }
+
+        .house-body {
+            width: 250px;
+            height: 150px;
+            background-color: var(--primary);
+            margin: 0 auto;
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            padding-top: 20px;
+        }
+
+        .window {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent1);
+            border-radius: 10px;
+            border: 3px solid var(--dark);
+        }
+
+        .door {
+            width: 40px;
+            height: 80px;
+            background-color: var(--dark);
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            padding: 20px 30px;
+            font-size: 1.4rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            min-width: 220px;
+            justify-content: center;
+        }
+
+        .control-btn:hover, .control-btn:focus {
+            transform: scale(1.05);
+            outline: 4px solid var(--accent1);
+        }
+
+        .btn-explore {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-sounds {
+            background-color: var(--accent3);
+            color: white;
+        }
+
+        .btn-colors {
+            background-color: var(--accent2);
+            color: var(--dark);
+        }
+
+        .feedback {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #E8F6F3;
+            border-radius: var(--border-radius);
+            border: 3px dashed var(--secondary);
+            font-size: 1.5rem;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .instructions {
+            background-color: #FFF9E6;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            border-left: 8px solid var(--accent1);
+            font-size: 1.3rem;
+        }
+
+        .instructions h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--dark);
+            font-size: 1.2rem;
+            border-top: 3px solid var(--secondary);
+        }
+
+        /* Modo alto contraste */
+        .high-contrast {
+            background-color: black;
+            color: #FFFF00;
+            background-image: none;
+        }
+
+        .high-contrast .header {
+            background: black;
+            color: #FFFF00;
+            border: 3px solid #FFFF00;
+        }
+
+        .high-contrast .places-container,
+        .high-contrast .panels-container,
+        .high-contrast .interactive-zone {
+            background-color: black;
+            color: #FFFF00;
+            border-color: #FFFF00;
+        }
+
+        .high-contrast .place-card,
+        .high-contrast .panel-card {
+            background-color: black;
+            color: #FFFF00;
+            border-color: #FFFF00;
+        }
+
+        .high-contrast .house-roof {
+            border-bottom-color: #FFFF00;
+        }
+
+        .high-contrast .house-body {
+            background-color: #333;
+        }
+
+        /* Texto grande */
+        .large-text {
+            font-size: 1.5rem;
+        }
+
+        .large-text h1 {
+            font-size: 3.8rem;
+        }
+
+        .large-text .section-title {
+            font-size: 2.5rem;
+        }
+
+        .large-text .place-name {
+            font-size: 2.2rem;
+        }
+
+        .large-text .panel-title {
+            font-size: 2.2rem;
+        }
+
+        /* Focus visible para accesibilidad */
+        button:focus, .place-card:focus, .panel-card:focus {
+            outline: 3px solid var(--accent2);
+            outline-offset: 3px;
+        }
+
+        /* Animación para feedback */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        /* Efecto de selección */
+        .selected {
+            border-color: var(--accent4) !important;
+            box-shadow: 0 0 0 4px rgba(241, 148, 138, 0.3) !important;
+            background: linear-gradient(135deg, #FFF5F5 0%, #ffffff 100%) !important;
+        }
+
+        /* Indicadores táctiles */
+        .touch-indicator {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-weight: bold;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header" role="banner">
+        <h1><i class="fas fa-home"></i> Lugares de Casa <i class="fas fa-home"></i></h1>
+        <p class="subtitle">Descubre y explora los diferentes espacios del hogar</p>
+        
+        <div class="accessibility-bar" role="toolbar" aria-label="Herramientas de accesibilidad">
+            <button class="accessibility-btn" id="highContrastBtn" aria-label="Activar modo alto contraste">
+                <i class="fas fa-adjust"></i> Alto Contraste
+            </button>
+            <button class="accessibility-btn" id="largeTextBtn" aria-label="Aumentar tamaño de texto">
+                <i class="fas fa-text-height"></i> Texto Grande
+            </button>
+            <button class="accessibility-btn" id="speakAllBtn" aria-label="Escuchar todos los lugares">
+                <i class="fas fa-volume-up"></i> Leer Todo
+            </button>
+            <button class="accessibility-btn" id="resetBtn" aria-label="Restablecer configuración">
+                <i class="fas fa-redo"></i> Reiniciar
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content" role="main">
+        <section class="places-container" aria-labelledby="places-title">
+            <h2 id="places-title" class="section-title"><i class="fas fa-map-marker-alt"></i> Lugares de Casa</h2>
+            
+            <div class="places-grid">
+                <div class="place-card" tabindex="0" role="button" aria-label="Baltram, lugar especial de la casa">
+                    <div class="touch-indicator">1</div>
+                    <div class="place-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <div class="place-name">Baltram</div>
+                    <div class="place-desc">Lugar especial para descansar y jugar</div>
+                </div>
+                
+                <div class="place-card" tabindex="0" role="button" aria-label="Batram, espacio familiar">
+                    <div class="touch-indicator">2</div>
+                    <div class="place-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <div class="place-name">Batram</div>
+                    <div class="place-desc">Espacio familiar para compartir</div>
+                </div>
+                
+                <div class="place-card" tabindex="0" role="button" aria-label="Zevin, área de actividades">
+                    <div class="touch-indicator">3</div>
+                    <div class="place-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="place-name">Zevin</div>
+                    <div class="place-desc">Área para juegos y actividades</div>
+                </div>
+                
+                <div class="place-card" tabindex="0" role="button" aria-label="Room, habitación personal">
+                    <div class="touch-indicator">4</div>
+                    <div class="place-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="place-name">Room</div>
+                    <div class="place-desc">Habitación personal para dormir</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panels-container" aria-labelledby="panels-title">
+            <h2 id="panels-title" class="section-title"><i class="fas fa-th-large"></i> Más Paneados</h2>
+            
+            <div class="panel-card" tabindex="0" role="button" aria-label="Casa IV, nivel cuatro de la casa">
+                <div class="panel-title"><i class="fas fa-building"></i> Casa IV</div>
+                <div class="panel-desc">El nivel cuatro de nuestra casa, con vistas especiales</div>
+            </div>
+            
+            <div class="panel-card" tabindex="0" role="button" aria-label="Casado IV, espacio conectado">
+                <div class="panel-title"><i class="fas fa-door-closed"></i> Casado IV</div>
+                <div class="panel-desc">Espacio conectado al área principal de la casa</div>
+            </div>
+            
+            <div class="panel-card" tabindex="0" role="button" aria-label="Plaza IV, área social">
+                <div class="panel-title"><i class="fas fa-umbrella-beach"></i> Plaza IV</div>
+                <div class="panel-desc">Área social para encuentros y reuniones familiares</div>
+            </div>
+        </section>
+
+        <section class="interactive-zone" aria-labelledby="interactive-title">
+            <h2 id="interactive-title" class="section-title"><i class="fas fa-gamepad"></i> Explora la Casa</h2>
+            
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> Cómo usar esta casa interactiva:</h3>
+                <p>1. Toca cualquier lugar para escuchar su nombre y descripción.</p>
+                <p>2. Usa los botones de accesibilidad para ajustar la página a tus necesidades.</p>
+                <p>3. Explora los diferentes "paneados" de la casa.</p>
+                <p>4. Presiona la tecla Tab para navegar entre los elementos.</p>
+            </div>
+            
+            <div class="house-visual">
+                <div class="house" aria-label="Representación visual de una casa con ventanas y puerta">
+                    <div class="house-roof"></div>
+                    <div class="house-body">
+                        <div class="window" aria-label="Ventana izquierda"></div>
+                        <div class="window" aria-label="Ventana derecha"></div>
+                        <div class="door" aria-label="Puerta principal"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn btn-explore" id="exploreBtn">
+                    <i class="fas fa-search"></i> Explorar Lugares
+                </button>
+                <button class="control-btn btn-sounds" id="soundsBtn">
+                    <i class="fas fa-music"></i> Sonidos de Casa
+                </button>
+                <button class="control-btn btn-colors" id="colorsBtn">
+                    <i class="fas fa-palette"></i> Cambiar Colores
+                </button>
+            </div>
+            
+            <div class="feedback" id="feedback" role="status" aria-live="polite">
+                <p>¡Bienvenido a nuestra casa! Toca un lugar para conocerlo mejor.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <p><i class="fas fa-universal-access"></i> Casa interactiva diseñada para niños con discapacidad visual y auditiva</p>
+        <p>Todos los elementos son accesibles con teclado y lectores de pantalla</p>
+    </footer>
+
+    <script>
+        // Elementos DOM importantes
+        const highContrastBtn = document.getElementById('highContrastBtn');
+        const largeTextBtn = document.getElementById('largeTextBtn');
+        const speakAllBtn = document.getElementById('speakAllBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const exploreBtn = document.getElementById('exploreBtn');
+        const soundsBtn = document.getElementById('soundsBtn');
+        const colorsBtn = document.getElementById('colorsBtn');
+        const feedback = document.getElementById('feedback');
+        const placeCards = document.querySelectorAll('.place-card');
+        const panelCards = document.querySelectorAll('.panel-card');
+        
+        // Para síntesis de voz
+        const speech = window.speechSynthesis;
+        
+        // Colores para alternar
+        const colorSchemes = [
+            { primary: '#FF9A76', secondary: '#5DADE2', accent1: '#F7DC6F', accent2: '#82E0AA', accent3: '#BB8FCE', accent4: '#F1948A' },
+            { primary: '#76FF9A', secondary: '#D25DE2', accent1: '#6FF7DC', accent2: '#AA82E0', accent3: '#CEBB8F', accent4: '#8AF194' },
+            { primary: '#9A76FF', secondary: '#E2D25D', accent1: '#DC6FF7', accent2: '#E0AA82', accent3: '#8FCEBB', accent4: '#F1948A' }
+        ];
+        let currentColorScheme = 0;
+        
+        // Sonidos de casa
+        const houseSounds = [
+            { name: "puerta", sound: "🔔 ¡Ding dong! La puerta suena" },
+            { name: "ventana", sound: "💨 ¡Viento! La ventana se abre" },
+            { name: "pasos", sound: "👣 ¡Tac tac! Sonidos de pasos" },
+            { name: "risas", sound: "😄 ¡Jaja! Risas en la casa" },
+            { name: "música", sound: "🎵 ¡La la la! Música familiar" }
+        ];
+        
+        // Función para hablar texto
+        function speakText(text) {
+            if (speech.speaking) {
+                speech.cancel();
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-ES';
+            utterance.rate = 0.8;
+            utterance.pitch = 1.1;
+            utterance.volume = 1;
+            
+            speech.speak(utterance);
+            showFeedback(text);
+        }
+        
+        // Función para mostrar retroalimentación
+        function showFeedback(message) {
+            feedback.innerHTML = `<p>${message}</p>`;
+            feedback.classList.add('pulse');
+            setTimeout(() => {
+                feedback.classList.remove('pulse');
+            }, 500);
+        }
+        
+        // Seleccionar/deseleccionar tarjeta
+        function toggleCardSelection(card) {
+            // Quitar selección de todas las tarjetas
+            placeCards.forEach(c => c.classList.remove('selected'));
+            panelCards.forEach(c => c.classList.remove('selected'));
+            
+            // Agregar selección a la tarjeta clickeada
+            card.classList.add('selected');
+        }
+        
+        // Hablar lugar al hacer clic
+        placeCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const placeName = this.querySelector('.place-name').textContent;
+                const placeDesc = this.querySelector('.place-desc').textContent;
+                const label = this.getAttribute('aria-label');
+                
+                speakText(`${placeName}. ${placeDesc}`);
+                toggleCardSelection(this);
+                
+                // Efecto visual
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+            
+            // También activar con teclado (Enter o espacio)
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+        
+        // Hablar panel al hacer clic
+        panelCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const panelTitle = this.querySelector('.panel-title').textContent;
+                const panelDesc = this.querySelector('.panel-desc').textContent;
+                const label = this.getAttribute('aria-label');
+                
+                speakText(`${panelTitle}. ${panelDesc}`);
+                toggleCardSelection(this);
+                
+                // Efecto visual
+                this.style.transform = 'translateX(15px)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+            });
+            
+            // También activar con teclado (Enter o espacio)
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+        
+        // Modo alto contraste
+        highContrastBtn.addEventListener('click', function() {
+            document.body.classList.toggle('high-contrast');
+            const isActive = document.body.classList.contains('high-contrast');
+            showFeedback(isActive ? 'Modo alto contraste activado' : 'Modo alto contraste desactivado');
+            this.setAttribute('aria-pressed', isActive);
+        });
+        
+        // Texto grande
+        largeTextBtn.addEventListener('click', function() {
+            document.body.classList.toggle('large-text');
+            const isActive = document.body.classList.contains('large-text');
+            showFeedback(isActive ? 'Texto grande activado' : 'Texto grande desactivado');
+            this.setAttribute('aria-pressed', isActive);
+        });
+        
+        // Leer todos los lugares
+        speakAllBtn.addEventListener('click', function() {
+            let allText = 'Lugares de casa: ';
+            
+            placeCards.forEach(card => {
+                const placeName = card.querySelector('.place-name').textContent;
+                const placeDesc = card.querySelector('.place-desc').textContent;
+                allText += `${placeName}, ${placeDesc}. `;
+            });
+            
+            allText += 'Más paneados: ';
+            
+            panelCards.forEach(card => {
+                const panelTitle = card.querySelector('.panel-title').textContent;
+                const panelDesc = card.querySelector('.panel-desc').textContent;
+                allText += `${panelTitle}, ${panelDesc}. `;
+            });
+            
+            speakText(allText);
+            showFeedback('Reproduciendo información de todos los lugares');
+        });
+        
+        // Explorar lugares (recorrido guiado)
+        exploreBtn.addEventListener('click', function() {
+            let explorationText = 'Vamos a explorar la casa. ';
+            
+            // Describir cada lugar con pausas
+            setTimeout(() => {
+                speakText("Empezamos con Baltram, un lugar especial para descansar y jugar.");
+            }, 500);
+            
+            setTimeout(() => {
+                speakText("Luego tenemos Batram, el espacio familiar para compartir.");
+            }, 4000);
+            
+            setTimeout(() => {
+                speakText("Después encontramos Zevin, el área para juegos y actividades.");
+            }, 7500);
+            
+            setTimeout(() => {
+                speakText("Y finalmente Room, la habitación personal para dormir.");
+            }, 11000);
+            
+            setTimeout(() => {
+                speakText("También tenemos Casa IV, el nivel cuatro con vistas especiales.");
+            }, 14500);
+            
+            setTimeout(() => {
+                speakText("Casado IV, un espacio conectado al área principal.");
+            }, 18000);
+            
+            setTimeout(() => {
+                speakText("Y Plaza IV, el área social para encuentros familiares.");
+            }, 21500);
+            
+            showFeedback('Iniciando recorrido por la casa...');
+        });
+        
+        // Sonidos de casa
+        soundsBtn.addEventListener('click', function() {
+            // Seleccionar un sonido aleatorio
+            const randomSound = houseSounds[Math.floor(Math.random() * houseSounds.length)];
+            speakText(randomSound.sound);
+            
+            // Efecto visual en la casa
+            const houseBody = document.querySelector('.house-body');
+            houseBody.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--accent4');
+            setTimeout(() => {
+                houseBody.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+            }, 500);
+            
+            showFeedback(`Sonido de casa: ${randomSound.name}`);
+        });
+        
+        // Cambiar esquema de colores
+        colorsBtn.addEventListener('click', function() {
+            currentColorScheme = (currentColorScheme + 1) % colorSchemes.length;
+            const colors = colorSchemes[currentColorScheme];
+            
+            document.documentElement.style.setProperty('--primary', colors.primary);
+            document.documentElement.style.setProperty('--secondary', colors.secondary);
+            document.documentElement.style.setProperty('--accent1', colors.accent1);
+            document.documentElement.style.setProperty('--accent2', colors.accent2);
+            document.documentElement.style.setProperty('--accent3', colors.accent3);
+            document.documentElement.style.setProperty('--accent4', colors.accent4);
+            
+            showFeedback(`Esquema de colores ${currentColorScheme + 1} activado`);
+        });
+        
+        // Reiniciar configuración
+        resetBtn.addEventListener('click', function() {
+            document.body.classList.remove('high-contrast', 'large-text');
+            
+            // Quitar selección de tarjetas
+            placeCards.forEach(card => card.classList.remove('selected'));
+            panelCards.forEach(card => card.classList.remove('selected'));
+            
+            // Restaurar colores originales
+            const originalColors = colorSchemes[0];
+            document.documentElement.style.setProperty('--primary', originalColors.primary);
+            document.documentElement.style.setProperty('--secondary', originalColors.secondary);
+            document.documentElement.style.setProperty('--accent1', originalColors.accent1);
+            document.documentElement.style.setProperty('--accent2', originalColors.accent2);
+            document.documentElement.style.setProperty('--accent3', originalColors.accent3);
+            document.documentElement.style.setProperty('--accent4', originalColors.accent4);
+            currentColorScheme = 0;
+            
+            // Restaurar color de la casa
+            document.querySelector('.house-body').style.backgroundColor = originalColors.primary;
+            
+            showFeedback('Configuración restablecida');
+        });
+        
+        // Inicializar atributos ARIA para botones toggle
+        highContrastBtn.setAttribute('aria-pressed', 'false');
+        largeTextBtn.setAttribute('aria-pressed', 'false');
+        
+        // Mensaje inicial
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                showFeedback('¡Bienvenido a Lugares de Casa! Explora los diferentes espacios del hogar.');
+            }, 1000);
+        });
+        
+        // Efecto interactivo para la casa visual
+        const house = document.querySelector('.house');
+        house.addEventListener('click', function() {
+            speakText("Esta es nuestra casa. Tiene un techo rojo, paredes naranjas, ventanas amarillas y una puerta azul.");
+            
+            // Efecto visual
+            this.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 300);
+        });
+    </script>
+</body>
+</html>

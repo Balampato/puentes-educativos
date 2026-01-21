@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inglés Inclusivo para Niños</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --color-fondo: #0a1931;
+            --color-secundario: #185adb;
+            --color-primario: #00a8e8;
+            --color-exito: #06d6a0;
+            --color-texto: #f8f9fa;
+            --color-botones: #ffd166;
+            --color-botones-hover: #ffc043;
+            --color-contraste: #ff9e00;
+            --radio-borde: 15px;
+            --fuente-grande: 1.3rem;
+            --fuente-extra-grande: 1.8rem;
+            --color-pinguino: #4a90e2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            font-size: var(--fuente-grande);
+        }
+
+        header,
+        footer {
+            background: var(--color-secundario);
+            text-align: center;
+            padding: 20px;
+            border-bottom: 5px solid var(--color-contraste);
+        }
+
+        footer {
+            border-top: 5px solid var(--color-contraste);
+            border-bottom: none;
+            margin-top: 30px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--color-botones);
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        h1 {
+            font-size: var(--fuente-extra-grande);
+            margin: 10px 0;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin: 20px 0 15px 0;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin: 15px 0 10px 0;
+        }
+
+        nav {
+            background: var(--color-secundario);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 15px;
+            border-bottom: 3px solid var(--color-contraste);
+        }
+
+        nav button {
+            background: var(--color-botones);
+            border: none;
+            padding: 15px 20px;
+            border-radius: var(--radio-borde);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #000;
+            min-width: 160px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        nav button:hover,
+        nav button:focus {
+            background: var(--color-botones-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        nav button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 25px 20px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: var(--radio-borde);
+            margin-bottom: 25px;
+            border: 3px solid var(--color-primario);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        input,
+        select,
+        textarea,
+        button:not(nav button),
+        a.boton {
+            width: 100%;
+            padding: 18px;
+            margin-top: 12px;
+            border-radius: var(--radio-borde);
+            border: 3px solid var(--color-primario);
+            font-size: 1.1rem;
+            background: white;
+            color: #000;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus,
+        button:focus {
+            outline: 4px solid var(--color-contraste);
+            outline-offset: 2px;
+        }
+
+        button:not(nav button),
+        a.boton {
+            background: var(--color-primario);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            padding: 18px;
+            font-size: 1.2rem;
+        }
+
+        button:hover:not(nav button),
+        a.boton:hover {
+            background: var(--color-botones);
+            color: #000;
+        }
+
+        .helper-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+
+        .helper-buttons button {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.2rem;
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            margin: 20px 0;
+            background: #000;
+        }
+
+        video {
+            width: 100%;
+            display: block;
+        }
+
+        #mensajeSistema {
+            background: var(--color-exito);
+            color: black;
+            padding: 20px;
+            border-radius: var(--radio-borde);
+            font-size: 1.2rem;
+            display: none;
+            margin-top: 20px;
+            font-weight: bold;
+            border: 3px solid #fff;
+        }
+
+        .oculto {
+            display: none !important;
+        }
+
+        .access {
+            background: var(--color-exito);
+            padding: 10px 20px;
+            border-radius: var(--radio-borde);
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 8px;
+        }
+
+        .contenedor-nivel {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: var(--radio-borde);
+            margin: 20px 0;
+            border-left: 8px solid var(--color-botones);
+        }
+
+        .lista-iconos {
+            list-style: none;
+            padding: 0;
+        }
+
+        .lista-iconos li {
+            padding: 10px 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .lista-iconos li:before {
+            content: "✓";
+            color: var(--color-exito);
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        /* ASISTENTE VIRTUAL PINGÜINO */
+        .pinguino-asistente {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .pinguino-contenedor {
+            position: relative;
+        }
+
+        .pinguino-cuerpo {
+            width: 100px;
+            height: 120px;
+            background: var(--color-pinguino);
+            border-radius: 50% 50% 45% 45%;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .pinguino-cuerpo:hover {
+            transform: scale(1.1);
+        }
+
+        .pinguino-cuerpo:active {
+            transform: scale(0.95);
+        }
+
+        .pinguino-barriga {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            top: 40px;
+            left: 15px;
+        }
+
+        .pinguino-ojos {
+            position: absolute;
+            top: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .pinguino-ojo {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .pinguino-pupila {
+            width: 10px;
+            height: 10px;
+            background: black;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            animation: parpadear 3s infinite;
+        }
+
+        .pinguino-pico {
+            width: 25px;
+            height: 15px;
+            background: #ff9966;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            left: 37px;
+            transform: rotate(-10deg);
+        }
+
+        .pinguino-alas {
+            position: absolute;
+            width: 30px;
+            height: 50px;
+            background: var(--color-pinguino);
+            border-radius: 50%;
+            top: 50px;
+        }
+
+        .pinguino-ala-izquierda {
+            left: -15px;
+            transform: rotate(30deg);
+        }
+
+        .pinguino-ala-derecha {
+            right: -15px;
+            transform: rotate(-30deg);
+        }
+
+        .pinguino-pies {
+            position: absolute;
+            bottom: -10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .pinguino-pie {
+            width: 25px;
+            height: 15px;
+            background: #ff9966;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .pinguino-chat {
+            position: absolute;
+            bottom: 140px;
+            right: 0;
+            width: 250px;
+            background: white;
+            color: #333;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            font-size: 1rem;
+            border: 3px solid var(--color-pinguino);
+        }
+
+        .pinguino-chat:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid white;
+        }
+
+        .pinguino-chat.activo {
+            display: block;
+            animation: aparecer 0.3s ease;
+        }
+
+        .pinguino-opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .pinguino-opcion {
+            background: var(--color-pinguino);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .pinguino-opcion:hover {
+            background: #3a7bc8;
+            transform: translateX(5px);
+        }
+
+        .pinguino-chat-texto {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .pinguino-cerrar {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .pinguino-sonriente .pinguino-pico {
+            transform: rotate(0deg) scale(1.2);
+            background: #ff6600;
+        }
+
+        @keyframes parpadear {
+            0%, 95%, 100% { transform: scale(1); }
+            96%, 99% { transform: scale(1, 0.1); }
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes saltar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .pinguino-saltando {
+            animation: saltar 1s ease infinite;
+        }
+
+        /* Accesibilidad */
+        .alto-contraste {
+            --color-fondo: #000;
+            --color-texto: #fff;
+            --color-secundario: #222;
+            --color-primario: #ffff00;
+            --color-exito: #00ff00;
+            --color-botones: #ffff00;
+            --color-botones-hover: #ff0;
+            --color-contraste: #ff0;
+            --color-pinguino: #0000ff;
+        }
+
+        .letra-grande {
+            font-size: 1.5rem;
+        }
+
+        .letra-grande h1 {
+            font-size: 2.5rem;
+        }
+
+        .letra-grande h2 {
+            font-size: 2rem;
+        }
+
+        .letra-grande h3 {
+            font-size: 1.8rem;
+        }
+
+        .letra-grande input,
+        .letra-grande select,
+        .letra-grande textarea,
+        .letra-grande button {
+            font-size: 1.4rem;
+            padding: 22px;
+        }
+
+        .control-accesibilidad {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-accesibilidad button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--color-primario);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-accesibilidad button:hover {
+            background: var(--color-botones);
+            transform: scale(1.1);
+        }
+
+        .info-nivel {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: var(--radio-borde);
+            margin-top: 20px;
+            border: 3px dashed var(--color-exito);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav button {
+                width: 90%;
+            }
+
+            .helper-buttons {
+                flex-direction: column;
+            }
+
+            .control-accesibilidad {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .control-accesibilidad button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .pinguino-asistente {
+                bottom: 80px;
+                right: 15px;
+                transform: scale(0.8);
+            }
+
+            .pinguino-chat {
+                width: 200px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ASISTENTE VIRTUAL PINGÜINO -->
+    <div class="pinguino-asistente">
+        <div class="pinguino-contenedor">
+            <div class="pinguino-chat" id="pinguinoChat">
+                <button class="pinguino-cerrar" onclick="cerrarChatPinguino()" aria-label="Cerrar chat del pingüino">×</button>
+                <div class="pinguino-chat-texto" id="pinguinoMensaje">¡Hola! Soy Pingu, tu amigo pingüino. ¿En qué puedo ayudarte hoy?</div>
+                <div class="pinguino-opciones">
+                    <button class="pinguino-opcion" onclick="pinguinoAyuda('saludos')">Aprender saludos</button>
+                    <button class="pinguino-opcion" onclick="pinguinoAyuda('alfabeto')">Repasar el alfabeto</button>
+                    <button class="pinguino-opcion" onclick="pinguinoAyuda('colores')">Aprender colores</button>
+                    <button class="pinguino-opcion" onclick="pinguinoAyuda('jugar')">Jugar un juego</button>
+                    <button class="pinguino-opcion" onclick="pinguinoAyuda('motivacion')">Darme ánimos</button>
+                </div>
+            </div>
+            <div class="pinguino-cuerpo" id="pinguinoCuerpo" onclick="alternarChatPinguino()" 
+                 aria-label="Asistente virtual Pingüino. Haz clic para interactuar" role="button" tabindex="0">
+                <div class="pinguino-barriga"></div>
+                <div class="pinguino-ojos">
+                    <div class="pinguino-ojo"><div class="pinguino-pupila"></div></div>
+                    <div class="pinguino-ojo"><div class="pinguino-pupila"></div></div>
+                </div>
+                <div class="pinguino-pico"></div>
+                <div class="pinguino-alas pinguino-ala-izquierda"></div>
+                <div class="pinguino-alas pinguino-ala-derecha"></div>
+                <div class="pinguino-pies">
+                    <div class="pinguino-pie"></div>
+                    <div class="pinguino-pie"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="control-accesibilidad">
+        <button onclick="alternarContraste()" aria-label="Activar alto contraste">🎨</button>
+        <button onclick="alternarTamañoTexto()" aria-label="Aumentar tamaño de texto">🔍</button>
+        <button onclick="detenerAudio()" aria-label="Detener audio">⏹️</button>
+    </div>
+
+    <header>
+        <h1><span class="emoji">🌍</span> English for kids </h1>
+        <p class="access"><span class="emoji">❤️</span> Programa inclusivo para niños con discapacidad visual y auditiva
+        </p>
+    </header>
+
+    <nav>
+        <button onclick="mostrar('inicio')" aria-label="Ir a la página de inicio">🏠 Inicio</button>
+        <button onclick="mostrar('sobre')" aria-label="Conocer sobre nosotros">👥 Sobre Nosotros</button>
+        <button onclick="mostrar('info')" aria-label="Ver información del programa">ℹ️ Información</button>
+        <button onclick="window.open('temas.html', '_blank')">📚 Clases</button>
+        <button onclick="window.open('indexCasos.html', '_blank')"> Clientes</button>
+    </nav>
+
+    <main>
+
+        <!-- ----------- INICIO ----------- -->
+        <div id="inicio" class="section">
+            <div class="helper-buttons">
+                <button onclick="activarAudio()" aria-label="Activar narrador de pantalla">
+                    <span class="emoji">🔊</span> Narrador
+                </button>
+
+                <button onclick="activarEjemplo()" aria-label="Escuchar ejemplo en inglés">
+                    <span class="emoji">🇬🇧</span> Ejemplo en Inglés
+                </button>
+                
+                <button onclick="saludarPinguino()" aria-label="Saludar al pingüino asistente">
+                    <span class="emoji">🐧</span> Saludar a Pingu
+                </button>
+            </div>
+
+            <h2><span class="emoji">👋</span> ¡Bienvenido!</h2>
+            <p>
+                Este programa ayuda a niños con discapacidad visual y auditiva a aprender inglés
+                de forma accesible, segura y divertida. Usamos colores brillantes, letras grandes
+                y muchas ayudas visuales y auditivas.
+            </p>
+            
+            <div class="contenedor-nivel">
+                <h3><span class="emoji">🐧</span> ¡Conoce a tu asistente Pingu!</h3>
+                <p>En la esquina inferior derecha encontrarás a <strong>Pingu</strong>, tu amigo pingüino azul. Él te ayudará a:</p>
+                <ul class="lista-iconos">
+                    <li>Practicar inglés de forma divertida</li>
+                    <li>Encontrar lecciones y actividades</li>
+                    <li>Recibir ánimos y motivación</li>
+                    <li>Resolver dudas sobre el programa</li>
+                </ul>
+                <p>¡Haz clic en Pingu para empezar a hablar con él!</p>
+            </div>
+
+            <h2><span class="emoji">📝</span> Formulario de Registro</h2>
+            <form id="formulario">
+                <input type="text" id="nombre" placeholder="Nombre del estudiante" required
+                    aria-label="Nombre del estudiante">
+                <input type="number" id="edad" placeholder="Edad" min="3" max="18" required
+                    aria-label="Edad del estudiante">
+
+                <select id="condicion" required aria-label="Seleccionar condición especial">
+                    <option value="">Seleccione condición</option>
+                    <option value="ciego">👨‍🦯 Discapacidad visual</option>
+                    <option value="sordo">👩‍🦰 Discapacidad auditiva</option>
+                    <option value="ambos">👨‍🦯👩‍🦰 Ambas discapacidades</option>
+                    <option value="ninguna">😊 Ninguna discapacidad</option>
+                </select>
+
+                <textarea id="mensaje" rows="4"
+                    placeholder="Cuéntanos tus necesidades especiales o preferencias de aprendizaje"
+                    aria-label="Necesidades especiales o preferencias de aprendizaje"></textarea>
+
+                <button type="submit" aria-label="Enviar formulario de registro">Enviar Registro</button>
+            </form>
+
+            <div id="mensajeSistema" aria-live="polite"></div>
+
+            <div id="seccionSordos" class="oculto">
+                <h3><span class="emoji">🤟</span> Ayuda para niños sordos</h3>
+                <p>Aprende los saludos básicos en inglés con lengua de señas:</p>
+                <div class="video-container">
+                    <video controls class="video" aria-label="Video de lengua de señas para saludos en inglés">
+                        <source src="" type="video/mp4">
+                        Tu navegador no soporta video. Aquí hay una descripción: Video que muestra cómo saludar en
+                        inglés usando lengua de señas.
+                    </video>
+                </div>
+                <div class="contenedor-nivel">
+                    <h4>Señas básicas para practicar:</h4>
+                    <ul class="lista-iconos">
+                        <li>Hola = Mover la mano de la frente hacia afuera</li>
+                        <li>Adiós = Mover la mano de adentro hacia afuera</li>
+                        <li>Gracias = Mano desde la barbilla hacia adelante</li>
+                        <li>Por favor = Mano circular sobre el pecho</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ----------- SOBRE NOSOTROS ----------- -->
+        <div id="sobre" class="section oculto">
+            <h2><span class="emoji">👥</span> Sobre Nosotros</h2>
+            <p>
+                Somos un equipo de maestros, diseñadores y especialistas en accesibilidad que creemos
+                que todos los niños merecen aprender inglés de manera divertida y sin barreras.
+            </p>
+
+            <div class="contenedor-nivel">
+                <h3><span class="emoji">🎯</span> Nuestra Misión</h3>
+                <ul class="lista-iconos">
+                    <li>Hacer el inglés accesible para todos los niños</li>
+                    <li>Usar tecnología para romper barreras</li>
+                    <li>Crear materiales divertidos y fáciles de usar</li>
+                    <li>Acompañar a cada niño en su aprendizaje</li>
+                </ul>
+            </div>
+
+            <div class="contenedor-nivel">
+                <h3><span class="emoji">🌈</span> Nuestros Valores</h3>
+                <ul class="lista-iconos">
+                    <li>Inclusión para todos</li>
+                    <li>Paciencia y cariño</li>
+                    <li>Aprendizaje divertido</li>
+                    <li>Respeto a las diferencias</li>
+                </ul>
+            </div>
+
+            <button onclick="window.open('nosotros.html', '_blank')"> Acerca de nosotros </button>
+
+        </div>
+
+
+        <!-- ----------- INFORMACIÓN ----------- -->
+        <div id="info" class="section oculto">
+            <h2><span class="emoji">ℹ️</span> Información del Programa</h2>
+
+            <div class="contenedor-nivel">
+                <h3><span class="emoji">👁️</span> Para niños con discapacidad visual</h3>
+                <ul class="lista-iconos">
+                    <li>Narrador de pantalla integrado</li>
+                    <li>Alto contraste y colores brillantes</li>
+                    <li>Letras grandes y fáciles de leer</li>
+                    <li>Navegación con teclado</li>
+                    <li>Descripciones de audio para imágenes</li>
+                </ul>
+            </div>
+
+            <div class="contenedor-nivel">
+                <h3><span class="emoji">👂</span> Para niños con discapacidad auditiva</h3>
+                <ul class="lista-iconos">
+                    <li>Lengua de señas en videos</li>
+                    <li>Subtítulos en todos los videos</li>
+                    <li>Visualizaciones claras y coloridas</li>
+                    <li>Instrucciones por escrito y visuales</li>
+                    <li>Iconos y emojis para facilitar comprensión</li>
+                </ul>
+            </div>
+
+            <div class="contenedor-nivel">
+                <h3><span class="emoji">🛡️</span> Seguridad y Privacidad</h3>
+                <p>Tu información está segura con nosotros. No compartimos datos personales
+                    y todo el contenido es apropiado para niños.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p><span class="emoji">💙</span> Proyecto Inclusivo • Educación con amor para todos los niños</p>
+        <p>Contacto: info@inglesinclusivo.org • Teléfono: 800-123-4567</p>
+        <p><span class="emoji">🐧</span> ¡No olvides visitar a tu amigo Pingu en la esquina inferior derecha!</p>
+    </footer>
+
+    <script>
+        // -------- VARIABLES GLOBALES --------
+        let audioActivo = false;
+        let vozActual = null;
+        let contrasteActivo = false;
+        let letraGrandeActiva = false;
+        let chatPinguinoAbierto = false;
+        let pinguinoSaltando = false;
+
+        // -------- FUNCIONES DEL PINGÜINO ASISTENTE --------
+        function alternarChatPinguino() {
+            const chat = document.getElementById('pinguinoChat');
+            const cuerpo = document.getElementById('pinguinoCuerpo');
+            
+            chatPinguinoAbierto = !chatPinguinoAbierto;
+            
+            if (chatPinguinoAbierto) {
+                chat.classList.add('activo');
+                cuerpo.classList.add('pinguino-sonriente');
+                hablar("¡Hola! Soy Pingu, tu amigo pingüino. ¿En qué puedo ayudarte hoy?");
+                mostrarMensaje("🐧 Pingu dice: ¡Hola! ¿En qué puedo ayudarte?");
+                // Enfocar el chat para navegación por teclado
+                setTimeout(() => {
+                    chat.focus();
+                }, 100);
+            } else {
+                chat.classList.remove('activo');
+                cuerpo.classList.remove('pinguino-sonriente');
+            }
+        }
+
+        function cerrarChatPinguino() {
+            const chat = document.getElementById('pinguinoChat');
+            const cuerpo = document.getElementById('pinguinoCuerpo');
+            
+            chat.classList.remove('activo');
+            cuerpo.classList.remove('pinguino-sonriente');
+            chatPinguinoAbierto = false;
+        }
+
+        function saludarPinguino() {
+            alternarChatPinguino();
+            
+            // Hacer saltar al pingüino
+            const cuerpo = document.getElementById('pinguinoCuerpo');
+            cuerpo.classList.add('pinguino-saltando');
+            
+            setTimeout(() => {
+                cuerpo.classList.remove('pinguino-saltando');
+            }, 2000);
+        }
+
+        function pinguinoAyuda(tipo) {
+            const mensajeDiv = document.getElementById('pinguinoMensaje');
+            let respuesta = "";
+            let audio = "";
+            
+            switch(tipo) {
+                case 'saludos':
+                    respuesta = "¡Vamos a practicar saludos!<br><br>En inglés decimos:<br>• Hello = Hola<br>• Goodbye = Adiós<br>• How are you? = ¿Cómo estás?<br>• I'm fine = Estoy bien";
+                    audio = "Vamos a practicar saludos en inglés. Hello significa hola. Goodbye es adiós. How are you significa cómo estás. I'm fine significa estoy bien. ¡Intenta decirlos en voz alta!";
+                    break;
+                case 'alfabeto':
+                    respuesta = "El alfabeto inglés tiene 26 letras. Vamos a practicar las primeras:<br><br>A, B, C, D, E, F, G<br>¡Muy bien! ¿Quieres practicar más en la sección de clases?";
+                    audio = "El alfabeto inglés tiene veintiseis letras. Las primeras son: A, B, C, D, E, F, G. ¡Muy bien! ¿Quieres practicar más? Ve a la sección de clases.";
+                    break;
+                case 'colores':
+                    respuesta = "¡Los colores en inglés son divertidos!<br><br>• Red = Rojo<br>• Blue = Azul (como yo)<br>• Yellow = Amarillo<br>• Green = Verde<br>• Orange = Naranja";
+                    audio = "Vamos a aprender colores en inglés. Red es rojo. Blue es azul, como yo. Yellow es amarillo. Green es verde. Orange es naranja. ¿Cuál es tu color favorito?";
+                    break;
+                case 'jugar':
+                    respuesta = "¡Me encanta jugar! Te propongo este juego:<br><br>1. Di un color en español<br>2. Yo lo digo en inglés<br>3. Tú repites después de mí<br><br>¿Empezamos? ¡Dime un color!";
+                    audio = "¡Me encanta jugar! Te propongo un juego. Di un color en español, yo lo digo en inglés, y tú lo repites después de mí. ¿Empezamos? ¡Dime un color!";
+                    break;
+                case 'motivacion':
+                    respuesta = "¡Tú puedes! Eres muy inteligente y estás aprendiendo muy rápido. Cada día sabes más inglés. ¡Sigue así, eres un campeón! 🏆";
+                    audio = "¡Tú puedes! Eres muy inteligente y estás aprendiendo muy rápido. Cada día sabes más inglés. ¡Sigue así, eres un campeón!";
+                    // Hacer saltar al pingüino
+                    const cuerpo = document.getElementById('pinguinoCuerpo');
+                    cuerpo.classList.add('pinguino-saltando');
+                    setTimeout(() => {
+                        cuerpo.classList.remove('pinguino-saltando');
+                    }, 1500);
+                    break;
+            }
+            
+            mensajeDiv.innerHTML = respuesta;
+            hablar(audio);
+            
+            // Cerrar automáticamente después de 8 segundos
+            setTimeout(() => {
+                if (chatPinguinoAbierto && tipo !== 'jugar') {
+                    cerrarChatPinguino();
+                }
+            }, 8000);
+        }
+
+        // -------- MENÚ --------
+        function mostrar(seccion) {
+            document.querySelectorAll(".section").forEach(s => s.classList.add("oculto"));
+            document.getElementById(seccion).classList.remove("oculto");
+            hablar("Mostrando sección " + seccion);
+            
+            // Si el pingüino está abierto, cerrarlo al cambiar de sección
+            if (chatPinguinoAbierto) {
+                cerrarChatPinguino();
+            }
+        }
+
+        // -------- AUDIO Y NARRACIÓN --------
+        function hablar(texto) {
+            if ("speechSynthesis" in window && audioActivo) {
+                // Detener cualquier narración previa
+                speechSynthesis.cancel();
+
+                let voz = new SpeechSynthesisUtterance(texto);
+                voz.lang = "es-ES";
+                voz.rate = 0.9; // Velocidad más lenta para niños
+                voz.pitch = 1.2; // Tono más amigable (como pingüino amigable)
+                voz.volume = 1.0;
+
+                // Intentar encontrar una voz femenina para ser más amigable
+                const voces = speechSynthesis.getVoices();
+                const vozFemenina = voces.find(v => v.lang === 'es-ES' && v.name.includes('Female')) || 
+                                   voces.find(v => v.lang === 'es-ES' && v.name.includes('Mujer')) ||
+                                   voces.find(v => v.lang === 'es-ES');
+                
+                if (vozFemenina) {
+                    voz.voice = vozFemenina;
+                }
+
+                vozActual = voz;
+                speechSynthesis.speak(voz);
+
+                // Mensaje visual para sordos
+                if (!audioActivo) {
+                    mostrarMensaje("💡 " + texto);
+                }
+            }
+        }
+
+        function activarAudio() {
+            audioActivo = !audioActivo;
+            if (audioActivo) {
+                mostrarMensaje("Narrador activado. Escucharás descripciones del contenido.");
+                hablar("Narrador activado. Te voy a ayudar a navegar por el programa. Bienvenido. No olvides saludar a Pingu, tu amigo pingüino azul, en la esquina inferior derecha.");
+                
+                // Animar al pingüino
+                const cuerpo = document.getElementById('pinguinoCuerpo');
+                cuerpo.classList.add('pinguino-saltando');
+                setTimeout(() => {
+                    cuerpo.classList.remove('pinguino-saltando');
+                }, 1000);
+            } else {
+                mostrarMensaje("Narrador desactivado.");
+                speechSynthesis.cancel();
+            }
+        }
+
+        function activarEjemplo() {
+            hablar("Hello! My name is Ana. What is your name?");
+            mostrarMensaje("🔊 Ejemplo en inglés: Hello! My name is Ana. What is your name?");
+            
+            // El pingüino también responde
+            setTimeout(() => {
+                if (audioActivo) {
+                    hablar("My name is Pingu! Nice to meet you!");
+                }
+            }, 1500);
+        }
+
+        function detenerAudio() {
+            speechSynthesis.cancel();
+            audioActivo = false;
+            mostrarMensaje("Audio detenido.");
+        }
+
+        // -------- AYUDAS VISUALES --------
+        function activarSenas() {
+            const seccion = document.getElementById("seccionSordos");
+            seccion.classList.toggle("oculto");
+
+            if (!seccion.classList.contains("oculto")) {
+                hablar("Mostrando ayuda de lengua de señas para saludos en inglés.");
+                mostrarMensaje("🤟 Sección de lengua de señas activada. Aquí puedes aprender a saludar en inglés con señas.");
+            }
+        }
+
+        // -------- FORMULARIO --------
+        document.getElementById("formulario").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let nombre = document.getElementById("nombre").value.trim();
+            let edad = document.getElementById("edad").value;
+            let condicion = document.getElementById("condicion").value;
+            let mensajeDiv = document.getElementById("mensajeSistema");
+
+            if (nombre === "" || edad === "" || condicion === "") {
+                mensajeDiv.style.display = "block";
+                mensajeDiv.textContent = "❌ Por favor completa todos los campos obligatorios.";
+                hablar("Por favor completa todos los campos obligatorios.");
+            } else {
+                mensajeDiv.style.display = "block";
+                mensajeDiv.innerHTML = `✅ <strong>¡Registro exitoso!</strong><br>Bienvenido ${nombre}, de ${edad} años.<br>Hemos registrado tus necesidades especiales y te contactaremos pronto.`;
+
+                let mensajeAudio = `Registro exitoso. Bienvenido ${nombre}. Te has registrado para el programa de inglés inclusivo. Tu amigo Pingu estará aquí para ayudarte en tu aprendizaje.`;
+                hablar(mensajeAudio);
+
+                // El pingüino saluda al nuevo usuario
+                setTimeout(() => {
+                    if (audioActivo) {
+                        hablar(`¡Hola ${nombre}! ¡Bienvenido al equipo! Estoy muy feliz de ser tu amigo pingüino.`);
+                        mostrarMensaje(`🐧 Pingu dice: ¡Hola ${nombre}! ¡Bienvenido!`);
+                        
+                        // Hacer saltar al pingüino de felicidad
+                        const cuerpo = document.getElementById('pinguinoCuerpo');
+                        cuerpo.classList.add('pinguino-saltando');
+                        setTimeout(() => {
+                            cuerpo.classList.remove('pinguino-saltando');
+                        }, 2000);
+                    }
+                }, 2000);
+
+                // Reiniciar formulario
+                document.getElementById("formulario").reset();
+
+                // Mostrar mensaje de confirmación por 5 segundos
+                setTimeout(() => {
+                    mensajeDiv.style.display = "none";
+                }, 7000);
+            }
+        });
+
+        // -------- CONTROLES DE ACCESIBILIDAD --------
+        function alternarContraste() {
+            contrasteActivo = !contrasteActivo;
+            if (contrasteActivo) {
+                document.body.classList.add("alto-contraste");
+                mostrarMensaje("🎨 Modo alto contraste activado");
+                hablar("Modo alto contraste activado. Los colores ahora tienen más contraste para mejor visibilidad.");
+            } else {
+                document.body.classList.remove("alto-contraste");
+                mostrarMensaje("🎨 Modo alto contraste desactivado");
+            }
+        }
+
+        function alternarTamañoTexto() {
+            letraGrandeActiva = !letraGrandeActiva;
+            if (letraGrandeActiva) {
+                document.body.classList.add("letra-grande");
+                mostrarMensaje("🔍 Texto grande activado");
+                hablar("Texto grande activado. Las letras ahora son más grandes para mejor visibilidad.");
+            } else {
+                document.body.classList.remove("letra-grande");
+                mostrarMensaje("🔍 Texto grande desactivado");
+            }
+        }
+
+        // -------- FUNCIÓN AUXILIAR PARA MENSAJES --------
+        function mostrarMensaje(texto) {
+            const mensajeDiv = document.getElementById("mensajeSistema");
+            mensajeDiv.textContent = texto;
+            mensajeDiv.style.display = "block";
+
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                mensajeDiv.style.display = "none";
+            }, 5000);
+        }
+
+        // -------- INICIALIZACIÓN --------
+        window.onload = function () {
+            // Cargar voces para el narrador
+            setTimeout(() => {
+                speechSynthesis.getVoices();
+            }, 500);
+            
+            // Activar narrador automáticamente para niños ciegos
+            setTimeout(() => {
+                hablar("Bienvenido al programa de inglés inclusivo para niños. Navega con los botones de arriba para explorar el contenido. Usa los botones de accesibilidad abajo a la derecha para ajustar la visualización. Y no olvides a tu nuevo amigo Pingu, el pingüino azul en la esquina inferior derecha. Haz clic en él para hablar y jugar.");
+                
+                // Presentar al pingüino
+                setTimeout(() => {
+                    mostrarMensaje("🐧 ¡Hola! Soy Pingu, tu amigo pingüino. Haz clic en mí para empezar a jugar y aprender inglés juntos.");
+                }, 4000);
+            }, 1000);
+
+            // Enfoque en el primer elemento para navegación por teclado
+            document.getElementById("nombre").focus();
+            
+            // Permitir navegación por teclado del pingüino
+            document.getElementById('pinguinoCuerpo').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    alternarChatPinguino();
+                }
+            });
+            
+            // Hacer que el pingüino salude ocasionalmente
+            setInterval(() => {
+                if (!chatPinguinoAbierto && Math.random() > 0.7 && audioActivo) {
+                    const saludos = [
+                        "¡No olvides que estoy aquí para ayudarte!",
+                        "¿Quieres aprender algo nuevo hoy?",
+                        "¡El inglés es divertido! Vamos a practicar.",
+                        "Haz clic en mí cuando necesites ayuda."
+                    ];
+                    const saludo = saludos[Math.floor(Math.random() * saludos.length)];
+                    hablar(saludo);
+                    
+                    // Animación sutil
+                    const cuerpo = document.getElementById('pinguinoCuerpo');
+                    cuerpo.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        cuerpo.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            }, 30000); // Cada 30 segundos
+        };
+    </script>
+</body>
+</html>

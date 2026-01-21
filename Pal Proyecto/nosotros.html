@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - Programa Inclusivo</title>
+    
+    <style>
+        :root {
+            --color-fondo: #0a1931;
+            --color-secundario: #185adb;
+            --color-primario: #00a8e8;
+            --color-exito: #06d6a0;
+            --color-texto: #f8f9fa;
+            --color-botones: #ffd166;
+            --color-botones-hover: #ffc043;
+            --color-contraste: #ff9e00;
+            --color-tarjeta: rgba(255, 255, 255, 0.1);
+            --radio-borde: 20px;
+            --fuente-grande: 1.3rem;
+            --fuente-extra-grande: 1.8rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            line-height: 1.6;
+            font-size: var(--fuente-grande);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Controles de accesibilidad */
+        .control-accesibilidad {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-accesibilidad button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--color-primario);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .control-accesibilidad button:hover {
+            background: var(--color-botones);
+            transform: scale(1.1);
+        }
+
+        /* Encabezado */
+        header {
+            background: var(--color-secundario);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 5px solid var(--color-contraste);
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--color-botones);
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.1);
+        }
+
+        .titulo {
+            color: var(--color-botones);
+            font-size: var(--fuente-extra-grande);
+            text-shadow: 2px 2px 0 #000;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .boton-inicio {
+            background: var(--color-botones);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radio-borde);
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .boton-inicio:hover {
+            background: var(--color-botones-hover);
+            transform: translateY(-3px);
+        }
+
+        /* Contenido principal */
+        .contenido {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            width: 100%;
+        }
+
+        .intro {
+            background: var(--color-tarjeta);
+            padding: 30px;
+            border-radius: var(--radio-borde);
+            margin-bottom: 40px;
+            border: 3px solid var(--color-primario);
+            text-align: center;
+        }
+
+        .intro h2 {
+            color: var(--color-botones);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Galería de equipo */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .miembro-equipo {
+            background: var(--color-tarjeta);
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            border: 3px solid var(--color-primario);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .miembro-equipo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: var(--color-botones);
+        }
+
+        .miembro-imagen {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--color-primario);
+        }
+
+        .descripcion {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .descripcion h3 {
+            color: var(--color-botones);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .descripcion p {
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        .rol {
+            display: inline-block;
+            background: var(--color-exito);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            align-self: flex-start;
+        }
+
+        /* Nuestros valores */
+        .valores {
+            background: var(--color-tarjeta);
+            padding: 40px;
+            border-radius: var(--radio-borde);
+            margin-top: 60px;
+            border: 3px solid var(--color-exito);
+        }
+
+        .valores h2 {
+            color: var(--color-exito);
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .valores-lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .valor-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: var(--radio-borde);
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .valor-item:hover {
+            border-color: var(--color-botones);
+            transform: translateY(-5px);
+        }
+
+        .valor-emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .valor-item h3 {
+            color: var(--color-botones);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* Mensaje del sistema */
+        #mensajeSistema {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--color-exito);
+            color: black;
+            padding: 20px;
+            border-radius: var(--radio-borde);
+            font-size: 1.2rem;
+            display: none;
+            z-index: 1001;
+            max-width: 300px;
+            font-weight: bold;
+            border: 3px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Pie de página */
+        footer {
+            background: var(--color-secundario);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+            border-top: 5px solid var(--color-contraste);
+        }
+
+        footer p {
+            font-size: 1.1rem;
+        }
+
+        /* Modos de accesibilidad */
+        .alto-contraste {
+            --color-fondo: #000;
+            --color-texto: #fff;
+            --color-secundario: #222;
+            --color-primario: #ffff00;
+            --color-exito: #00ff00;
+            --color-botones: #ffff00;
+            --color-botones-hover: #ff0;
+            --color-contraste: #ff0;
+            --color-tarjeta: #333;
+        }
+
+        .letra-grande {
+            font-size: 1.5rem;
+        }
+
+        .letra-grande h1, .letra-grande h2, .letra-grande h3 {
+            font-size: 2rem;
+        }
+
+        .letra-grande p {
+            font-size: 1.4rem;
+        }
+
+        .sin-imagenes .miembro-imagen {
+            display: none;
+        }
+
+        .sin-imagenes .descripcion {
+            min-height: 300px;
+            justify-content: center;
+        }
+
+        .sin-imagenes .miembro-equipo {
+            border: 3px dashed var(--color-contraste);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .galeria {
+                grid-template-columns: 1fr;
+            }
+
+            .control-accesibilidad {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .control-accesibilidad button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            #mensajeSistema {
+                bottom: 80px;
+                right: 10px;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .intro, .descripcion, .valores {
+                padding: 20px;
+            }
+
+            .miembro-imagen {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Controles de accesibilidad -->
+    <div class="control-accesibilidad">
+        <button onclick="alternarContraste()" aria-label="Activar alto contraste">🎨</button>
+        <button onclick="alternarTamañoTexto()" aria-label="Aumentar tamaño de texto">🔍</button>
+        <button onclick="activarAudio()" aria-label="Activar narrador">🔊</button>
+        <button onclick="alternarImagenes()" aria-label="Alternar visualización de imágenes">👁️</button>
+    </div>
+
+    <!-- Mensaje del sistema -->
+    <div id="mensajeSistema" aria-live="polite"></div>
+
+    <!-- Encabezado con logo y título -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="img/logo.jpeg" alt="Logo del programa inclusivo - Un corazón con las manos de diferentes colores" class="logo-img">
+        </a>
+        <h1 class="titulo">🎭 Sobre Nosotros</h1>
+        <a href="index.html" class="boton-inicio">
+            <span>🏠</span> Volver al Inicio
+        </a>
+    </header>
+    
+    <!-- Contenido principal -->
+    <main class="contenido">
+        <section class="intro">
+            <h2>👥 Nuestra Historia y Equipo</h2>
+            <p>Somos un equipo de profesionales comprometidos con hacer que el aprendizaje del inglés sea accesible para todos los niños, sin importar sus habilidades o discapacidades. Creemos en un mundo donde cada niño tenga la oportunidad de aprender y crecer.</p>
+            <button onclick="hablar('Somos un equipo de profesionales comprometidos con hacer que el aprendizaje del inglés sea accesible para todos los niños')" style="margin-top: 20px; padding: 12px 24px; background: var(--color-botones); color: #000; border: none; border-radius: var(--radio-borde); font-size: 1.1rem; cursor: pointer;">
+                🔊 Escuchar Descripción
+            </button>
+        </section>
+        
+        <!-- Galería de imágenes -->
+        <section class="galeria">
+            <!-- Miembro 1 -->
+            <div class="miembro-equipo">
+                <img src="img/equipo1.jpg" alt="Evelyn Torres Barrios - Directora General, sonriendo y con gafas" class="miembro-imagen">
+                <div class="descripcion">
+                    <span class="rol">🎯 Directora</span>
+                    <h3>Evelyn Torres Barrios</h3>
+                    <p>Con más de 10 años de experiencia en educación inclusiva. Lidera nuestro equipo con pasión y dedicación, asegurando que cada niño reciba la atención que merece.</p>
+                    <button onclick="hablarMiembro('Evelyn Torres Barrios, Directora General con más de 10 años de experiencia en educación inclusiva')" style="background: var(--color-primario); color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; margin-top: auto;">
+                        🔊 Conocer a Evelyn
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Miembro 2 -->
+            <div class="miembro-equipo">
+                <img src="img/equipo2.jpg" alt="Brandon Pottiew Barron - Jefe de Desarrollo, persona con discapacidad visual usando tecnología asistiva" class="miembro-imagen">
+                <div class="descripcion">
+                    <span class="rol">💻 Desarrollo</span>
+                    <h3>Brandon Pottiew Barron</h3>
+                    <p>Especialista en tecnologías emergentes y accesibilidad digital. Desarrolla las herramientas que hacen posible nuestro programa inclusivo.</p>
+                    <button onclick="hablarMiembro('Brandon Pottiew Barron, Jefe de Desarrollo, especialista en tecnologías accesibles')" style="background: var(--color-primario); color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; margin-top: auto;">
+                        🔊 Conocer a Brandon
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Miembro 3 -->
+            <div class="miembro-equipo">
+                <img src="img/equipo3.jpg" alt="Yael Adrian Luna Perez - Directora de Marketing, usando lengua de señas para comunicarse" class="miembro-imagen">
+                <div class="descripcion">
+                    <span class="rol">📢 Marketing</span>
+                    <h3>Yael Adrian Luna Perez</h3>
+                    <p>Experta en estrategias digitales y comunicación inclusiva. Se asegura de que nuestro mensaje llegue a todas las familias que nos necesitan.</p>
+                    <button onclick="hablarMiembro('Yael Adrian Luna Perez, Directora de Marketing, experta en comunicación inclusiva')" style="background: var(--color-primario); color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; margin-top: auto;">
+                        🔊 Conocer a Yael
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Miembro 4 -->
+            <div class="miembro-equipo">
+                <img src="img/equipo2.jpg" alt="Diego Alejandro Sanchez Figueroa - Diseñador UX, trabajando en diseño accesible" class="miembro-imagen">
+                <div class="descripcion">
+                    <span class="rol">🎨 Diseño</span>
+                    <h3>Diego Alejandro Sanchez Figueroa</h3>
+                    <p>Crea experiencias digitales intuitivas, accesibles y atractivas para todos los niños, incluyendo aquellos con discapacidades.</p>
+                    <button onclick="hablarMiembro('Diego Alejandro Sanchez Figueroa, Diseñador UX, crea experiencias accesibles para todos')" style="background: var(--color-primario); color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; margin-top: auto;">
+                        🔊 Conocer a Diego
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Miembro 5 -->
+            <div class="miembro-equipo">
+                <img src="img/equipo4.jpg" alt="David Avila Martínez - Especialista en Finanzas, revisando proyectos inclusivos" class="miembro-imagen">
+                <div class="descripcion">
+                    <span class="rol">💰 Finanzas</span>
+                    <h3>David Avila Martínez</h3>
+                    <p>Responsable de la gestión económica y planificación estratégica. Asegura que nuestros recursos se usen para maximizar el impacto en los niños.</p>
+                    <button onclick="hablarMiembro('David Avila Martínez, Especialista en Finanzas, gestiona nuestros recursos para ayudar a más niños')" style="background: var(--color-primario); color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; margin-top: auto;">
+                        🔊 Conocer a David
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Miembro 6 -->
+            <div class="miembro-equipo">
+                <img src="img/equipo5.jpg" alt="Balam Rosas Hernandez - Diseñador UI, mostrando diseños coloridos y accesibles" class="miembro-imagen">
+                <div class="descripcion">
+                    <span class="rol">✨ Diseño UI</span>
+                    <h3>Balam Rosas Hernandez</h3>
+                    <p>Crea interfaces coloridas, divertidas y accesibles que hacen que aprender inglés sea una experiencia alegre para todos los niños.</p>
+                    <button onclick="hablarMiembro('Balam Rosas Hernandez, Diseñador UI, crea interfaces divertidas y accesibles para niños')" style="background: var(--color-primario); color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; margin-top: auto;">
+                        🔊 Conocer a Balam
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Miembro 7 -->
+            <div class="miembro-equipo">
+                <img src="img/equipo6.jpg" alt="Mario Eduardo Sanchez Rodriguez - Especialista en Atención al Cliente, conversando con una familia" class="miembro-imagen">
+                <div class="descripcion">
+                    <span class="rol">🤝 Atención</span>
+                    <h3>Mario Eduardo Sanchez Rodriguez</h3>
+                    <p>Garantiza la satisfacción y fidelización de nuestras familias. Siempre disponible para escuchar y ayudar con cualquier necesidad.</p>
+                    <button onclick="hablarMiembro('Mario Eduardo Sanchez Rodriguez, Especialista en Atención al Cliente, siempre disponible para ayudar a las familias')" style="background: var(--color-primario); color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; margin-top: auto;">
+                        🔊 Conocer a Mario
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nuestros valores -->
+        <section class="valores">
+            <h2>🌈 Nuestros Valores</h2>
+            <div class="valores-lista">
+                <div class="valor-item">
+                    <div class="valor-emoji">❤️</div>
+                    <h3>Inclusión Total</h3>
+                    <p>Creemos que todos los niños merecen aprender, sin importar sus habilidades o discapacidades.</p>
+                </div>
+                <div class="valor-item">
+                    <div class="valor-emoji">🤝</div>
+                    <h3>Respeto</h3>
+                    <p>Valoramos las diferencias y tratamos a cada niño con la dignidad que merece.</p>
+                </div>
+                <div class="valor-item">
+                    <div class="valor-emoji">🎯</div>
+                    <h3>Compromiso</h3>
+                    <p>Nos dedicamos completamente a hacer que el aprendizaje sea accesible y divertido.</p>
+                </div>
+                <div class="valor-item">
+                    <div class="valor-emoji">✨</div>
+                    <h3>Innovación</h3>
+                    <p>Siempre buscamos nuevas formas de hacer que el inglés sea más accesible para todos.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2025 Programa Inclusivo de Inglés para Niños. Todos los derechos reservados.</p>
+        <p style="margin-top: 10px; font-size: 1rem;">Hecho con ❤️ para niños de todas las habilidades</p>
+    </footer>
+
+    <script>
+        // -------- VARIABLES GLOBALES --------
+        let audioActivo = false;
+        let contrasteActivo = false;
+        let letraGrandeActiva = false;
+        let imagenesActivas = true;
+
+        // -------- FUNCIÓN PARA MOSTRAR MENSAJES --------
+        function mostrarMensaje(texto) {
+            const mensajeDiv = document.getElementById('mensajeSistema');
+            mensajeDiv.textContent = texto;
+            mensajeDiv.style.display = 'block';
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                mensajeDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // -------- NARRACIÓN --------
+        function hablar(texto) {
+            if ('speechSynthesis' in window) {
+                // Detener cualquier narración previa
+                speechSynthesis.cancel();
+                
+                let voz = new SpeechSynthesisUtterance(texto);
+                voz.lang = 'es-ES';
+                voz.rate = 0.9; // Velocidad más lenta para niños
+                voz.pitch = 1.2; // Tono más amigable
+                voz.volume = 1.0;
+                
+                speechSynthesis.speak(voz);
+                
+                // Mensaje visual para sordos
+                mostrarMensaje("🔊 " + texto.substring(0, 100) + "...");
+            }
+        }
+
+        function hablarMiembro(descripcion) {
+            hablar(descripcion);
+        }
+
+        function activarAudio() {
+            audioActivo = !audioActivo;
+            if (audioActivo) {
+                mostrarMensaje('Narrador activado. Escucharás descripciones del contenido.');
+                hablar('Narrador activado. Ahora puedes escuchar descripciones de nuestro equipo y valores.');
+            } else {
+                mostrarMensaje('Narrador desactivado.');
+                speechSynthesis.cancel();
+            }
+        }
+
+        // -------- CONTROLES DE ACCESIBILIDAD --------
+        function alternarContraste() {
+            contrasteActivo = !contrasteActivo;
+            if (contrasteActivo) {
+                document.body.classList.add('alto-contraste');
+                mostrarMensaje('🎨 Modo alto contraste activado');
+                hablar('Modo alto contraste activado. Los colores ahora tienen más contraste para mejor visibilidad.');
+            } else {
+                document.body.classList.remove('alto-contraste');
+                mostrarMensaje('🎨 Modo alto contraste desactivado');
+            }
+        }
+
+        function alternarTamañoTexto() {
+            letraGrandeActiva = !letraGrandeActiva;
+            if (letraGrandeActiva) {
+                document.body.classList.add('letra-grande');
+                mostrarMensaje('🔍 Texto grande activado');
+                hablar('Texto grande activado. Las letras ahora son más grandes para mejor visibilidad.');
+            } else {
+                document.body.classList.remove('letra-grande');
+                mostrarMensaje('🔍 Texto grande desactivado');
+            }
+        }
+
+        function alternarImagenes() {
+            imagenesActivas = !imagenesActivas;
+            if (imagenesActivas) {
+                document.body.classList.remove('sin-imagenes');
+                mostrarMensaje('👁️ Imágenes visibles');
+                hablar('Imágenes visibles. Ahora puedes ver las fotos de nuestro equipo.');
+            } else {
+                document.body.classList.add('sin-imagenes');
+                mostrarMensaje('👁️ Imágenes ocultas - Modo texto');
+                hablar('Imágenes ocultadas. Ahora solo verás la información en texto.');
+            }
+        }
+
+        // -------- DESCRIPCIONES DETALLADAS DE IMÁGENES --------
+        function describirImagen(altText) {
+            hablar("Imagen: " + altText);
+        }
+
+        // -------- INICIALIZACIÓN --------
+        window.onload = function() {
+            // Activar narrador automáticamente para niños ciegos
+            setTimeout(() => {
+                hablar("Bienvenido a la página 'Sobre Nosotros'. Conoce a nuestro equipo comprometido con hacer el inglés accesible para todos los niños. Usa los botones de accesibilidad abajo a la derecha para ajustar la visualización.");
+            }, 1000);
+            
+            // Añadir eventos a las imágenes para descripción detallada
+            document.querySelectorAll('.miembro-imagen').forEach(img => {
+                img.addEventListener('click', function() {
+                    describirImagen(this.alt);
+                });
+                
+                // Añadir descripción al pasar el ratón (para baja visión)
+                img.addEventListener('mouseenter', function() {
+                    if (audioActivo) {
+                        hablar("Imagen de " + this.alt.split('-')[0]);
+                    }
+                });
+            });
+            
+            // Hacer las tarjetas navegables con teclado
+            document.querySelectorAll('.miembro-equipo').forEach(card => {
+                card.setAttribute('tabindex', '0');
+                card.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        const nombre = this.querySelector('h3').textContent;
+                        const descripcion = this.querySelector('p').textContent;
+                        hablar(nombre + ". " + descripcion);
+                    }
+                });
+            });
+        };
+
+        // -------- DETENER AUDIO AL SALIR DE LA PÁGINA --------
+        window.addEventListener('beforeunload', function() {
+            speechSynthesis.cancel();
+        });
+    </script>
+</body>
+</html>

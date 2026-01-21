@@ -1,0 +1,345 @@
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #e6f7ff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Contraste mejorado para baja visión */
+        .header {
+            position: relative;
+            padding: 20px 30px;
+            background-color: #0a5c7a;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .accessibility-controls {
+            background-color: #f0f8ff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #0a5c7a;
+        }
+
+        .accessibility-btn {
+            background-color: #0a5c7a;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .accessibility-btn:hover {
+            background-color: #0d7ea4;
+            transform: scale(1.05);
+        }
+
+        .accessibility-btn:focus {
+            outline: 3px solid #ffcc00;
+            outline-offset: 2px;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-link {
+            display: block;
+        }
+
+        .logo-link:focus {
+            outline: 3px solid #ffcc00;
+            border-radius: 50%;
+        }
+
+        .temas {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 30px;
+            flex-wrap: wrap;
+        }
+
+        .columna {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Tarjetas con mejor contraste y tamaño */
+        .tema {
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 25px;
+            width: 400px;
+            max-width: 100%;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 3px solid #0a5c7a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tema:hover, .tema:focus-within {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .tema:focus {
+            outline: 3px solid #ffcc00;
+        }
+
+        /* Indicador táctil para no videntes */
+        .tema::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 15px;
+            height: 100%;
+            background-color: #ffcc00;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tema:hover::before {
+            opacity: 1;
+        }
+
+        .tema-img-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .tema img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 15px;
+            display: block;
+            margin: 0 auto 15px auto;
+            border: 2px solid #0a5c7a;
+        }
+
+        /* Indicador de audio para sordos */
+        .audio-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 0, 0, 0.8);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .tema h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #0a5c7a;
+        }
+
+        .tema p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .tema-link {
+            display: inline-block;
+            background-color: #0a5c7a;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .tema-link:hover, .tema-link:focus {
+            background-color: #0d7ea4;
+            transform: scale(1.05);
+            border-color: #ffcc00;
+            outline: none;
+        }
+
+        .tema-link:focus {
+            box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.5);
+        }
+
+        /* Estilos para modo alto contraste */
+        body.high-contrast {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body.high-contrast .tema {
+            background-color: #000;
+            border-color: #fff;
+            color: #fff;
+        }
+
+        body.high-contrast .tema h3 {
+            color: #ffcc00;
+        }
+
+        body.high-contrast .tema-link {
+            background-color: #ffcc00;
+            color: #000;
+        }
+
+        /* Estilos para texto grande */
+        body.large-text {
+            font-size: 120%;
+        }
+
+        body.large-text .tema h3 {
+            font-size: 1.8rem;
+        }
+
+        body.large-text .tema-link {
+            font-size: 1.3rem;
+            padding: 15px 30px;
+        }
+
+        /* Indicador de selección para navegación por teclado */
+        *:focus {
+            outline: 3px solid #ffcc00 !important;
+            outline-offset: 2px;
+        }
+
+        /* Footer mejorado */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #0a5c7a;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-accessibility {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 1100px) {
+            .temas {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .columna {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+                margin-top: 10px;
+            }
+            
+            .logo-container {
+                position: relative;
+                left: 0;
+                top: 0;
+                transform: none;
+                margin-bottom: 10px;
+            }
+            
+            .header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 15px;
+            }
+            
+            .accessibility-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .accessibility-btn {
+                margin: 5px 0;
+            }
+            
+            .tema {
+                width: 100%;
+                padding: 20px;
+            }
+        }
+
+        /* Notificación de accesibilidad */
+        .accessibility-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0a5c7a;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            max-width: 300px;
+        }
+
+        .accessibility-notification.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
