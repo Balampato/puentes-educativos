@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>Mi Perfil · Conexión Vital</title>
+  <style>
+    :root {
+      --azul-suave: #6baed6;
+      --verde-menta: #7bc8a4;
+      --naranja-claro: #ffb347;
+      --rosa-pastel: #f8b4c8;
+      --morado-claro: #c3aed6;
+      --blanco: #fffef9;
+      --gris-fondo: #f7f9fc;
+      --texto: #3e4a5b;
+      --sombra-suave: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #e8f4fd 0%, #fce4ec 50%, #e8fde8 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--texto);
+    }
+    .perfil-container {
+      width: 100%;
+      max-width: 480px;
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 0 2px rgba(255,255,255,0.8) inset;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 650px;
+    }
+    .perfil-header {
+      background: linear-gradient(120deg, var(--azul-suave), var(--morado-claro));
+      padding: 24px 20px;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+    .perfil-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: white;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+    .perfil-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .perfil-header h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+    .perfil-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background: var(--gris-fondo);
+    }
+    .input-group {
+      margin-bottom: 14px;
+    }
+    .input-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      color: var(--texto);
+    }
+    .input-group input, .input-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid #e0e7ef;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: white;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      width: 100%;
+    }
+    .btn-primary {
+      background: var(--verde-menta);
+      color: white;
+      border: none;
+    }
+    .btn-outline {
+      background: white;
+      color: var(--azul-suave);
+      border: 2px solid var(--azul-suave);
+    }
+    .btn-small {
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      width: auto;
+    }
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #7bc8a4;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(123,200,164,0.4);
+      z-index: 999;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="perfil-container">
+    <header class="perfil-header">
+      <div class="perfil-avatar" id="avatarContainer">
+        <img id="avatarImg" src="" alt="avatar" style="display:none;">
+        <span id="avatarInicial">👤</span>
+      </div>
+      <h1 id="nombrePerfil">Mi Perfil</h1>
+      <p id="emailPerfil" style="opacity:0.9; font-size:0.85rem;"></p>
+    </header>
+
+    <main class="perfil-content">
+      <div class="input-group">
+        <label>Nombre público</label>
+        <input type="text" id="nombrePublico" placeholder="Elige un nombre para el foro">
+      </div>
+      <div class="input-group">
+        <label>Biografía</label>
+        <textarea id="bio" placeholder="Cuéntanos algo sobre ti..." rows="3"></textarea>
+      </div>
+
+      <button class="btn btn-primary" id="btnGuardarPerfil">Guardar cambios</button>
+      <button class="btn btn-outline btn-small" id="btnVolver" style="margin-top:10px;">← Volver al panel</button>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAIxUOpEjRwtxMHPicFOMqscxqb-nWYEYA",
+      authDomain: "conexion-vital-cdb49.firebaseapp.com",
+      projectId: "conexion-vital-cdb49",
+      storageBucket: "conexion-vital-cdb49.firebasestorage.app",
+      messagingSenderId: "1067275843636",
+      appId: "1:1067275843636:web:3dd0074322cd11d6df7261"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const avatarImg = document.getElementById('avatarImg');
+    const avatarInicial = document.getElementById('avatarInicial');
+    const nombrePerfil = document.getElementById('nombrePerfil');
+    const emailPerfil = document.getElementById('emailPerfil');
+    const nombrePublico = document.getElementById('nombrePublico');
+    const bio = document.getElementById('bio');
+    const btnGuardar = document.getElementById('btnGuardarPerfil');
+    const btnVolver = document.getElementById('btnVolver');
+    const toast = document.getElementById('toast');
+
+    function mostrarToast(mensaje, esExito = true) {
+      toast.textContent = mensaje;
+      toast.style.display = 'block';
+      toast.style.background = esExito ? '#7bc8a4' : '#f8b4c8';
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+
+    // Cargar datos del usuario autenticado
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // No hay sesión, redirigir al inicio
+        window.location.href = 'Paginaweb_alphav1.html';
+        return;
+      }
+
+      // Mostrar datos básicos de Auth
+      emailPerfil.textContent = user.email || 'Correo no disponible';
+      nombrePerfil.textContent = user.displayName || 'Sin nombre';
+      
+      if (user.photoURL) {
+        avatarImg.src = user.photoURL;
+        avatarImg.style.display = 'block';
+        avatarInicial.style.display = 'none';
+      } else {
+        avatarImg.style.display = 'none';
+        avatarInicial.textContent = (user.displayName || 'U')[0].toUpperCase();
+      }
+
+      // Cargar datos adicionales desde Firestore (nombre público, bio)
+      const userDocRef = doc(db, "usuarios", user.uid);
+      try {
+        const docSnap = await getDoc(userDocRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          nombrePublico.value = data.nombrePublico || '';
+          bio.value = data.bio || '';
+        }
+      } catch (error) {
+        console.error("Error al cargar perfil de Firestore:", error);
+      }
+    });
+
+    // Guardar cambios
+    btnGuardar.addEventListener('click', async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        mostrarToast('Debes iniciar sesión', false);
+        return;
+      }
+
+      const nuevoNombre = nombrePublico.value.trim();
+      const nuevaBio = bio.value.trim();
+
+      try {
+        // Guardar en Firestore
+        const userDocRef = doc(db, "usuarios", user.uid);
+        await setDoc(userDocRef, {
+          nombrePublico: nuevoNombre,
+          bio: nuevaBio,
+          email: user.email,
+          ultimaActualizacion: serverTimestamp()
+        }, { merge: true });
+
+        mostrarToast('¡Perfil actualizado! 🎉');
+      } catch (error) {
+        console.error(error);
+        mostrarToast('Error al guardar los cambios', false);
+      }
+    });
+
+    // Volver al panel
+    btnVolver.addEventListener('click', () => {
+      window.location.href = 'Forov1.html';
+    });
+  </script>
+</body>
+</html>

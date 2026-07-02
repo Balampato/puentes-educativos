@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Conexión Vital - Sistema de Alerta y Apoyo</title> <link rel="preload" href="CSS.aplhav1/disenioalphav1.css" as="style"> <!--Vinculacion css--> <link rel="stylesheet" href="CSS.aplhav1/disenioalphav1.css"> <!-- Firebase SDKs (si no los tienes, agrégalos completos) --> </head>
+<body> <div class="app-container"> <!-- Encabezado fijo --> <header class="app-header"> <span class="logo-icon">🛡️</span> <h1>Conexión Vital</h1> <p class="subtitle">Sistema Integral de Alerta y Apoyo</p> <span class="shield-badge">🔒 Anónimo y Seguro</span> </header>
+    <!-- Contenido dinámico -->
+    <main class="app-content" id="appContent">
+        <!-- PÁGINA DE INICIO / LANDING -->
+        <section class="page active" id="page-home">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span style="font-size: 3rem; display: block; margin-bottom: 8px;">🤝</span>
+                <h2 style="color: var(--azul-oscuro); font-size: 1.4rem;">Bienvenido a Conexión Vital</h2>
+                <p style="color: #5a6f82; font-size: 0.9rem;">Un espacio seguro para reportar situaciones de
+                    violencia de forma <strong>anónima</strong> y recibir orientación.</p>
+            </div>
+
+            <div class="card">
+                <h3>🔍 ¿Cómo funciona?</h3>
+                <p>1. Regístrate o inicia sesión de forma segura.<br>2. Realiza un reporte anónimo con los detalles
+                    que desees compartir.<br>3. Orientadores escolares revisarán la información para tomar medidas
+                    de apoyo.</p>
+            </div>
+
+            <div class="card">
+                <h3>⚠️ Botón de Alerta Rápida</h3>
+                <p>Si necesitas ayuda urgente, usa el botón de alerta. Notificarás inmediatamente al equipo de
+                    orientación.</p>
+                <button class="btn btn-alert" id="btnAlertaRapida" style="margin-top: 10px;">
+                    🚨 ALERTA URGENTE
+                </button>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn btn-primary" id="btnGoLogin" style="flex:1;">Iniciar Sesión</button>
+                <button class="btn btn-outline" id="btnGoRegister" style="flex:1;">Registrarse</button>
+            </div>
+
+            <p class="text-center" style="margin-top: 14px; font-size: 0.75rem; color: #7f8c9b;">
+                🛡️ Tus datos están protegidos. La confidencialidad es nuestra prioridad.
+            </p>
+        </section>
+
+        <!-- PÁGINA DE INICIO DE SESIÓN -->
+        <section class="page" id="page-login">
+            <h2 style="color: var(--azul-oscuro); margin-bottom: 8px;">🔐 Iniciar Sesión</h2>
+            <p style="color: #5a6f82; font-size: 0.85rem; margin-bottom: 18px;">Accede a tu cuenta para realizar
+                reportes o dar seguimiento.</p>
+
+            <div class="input-group">
+                <label>Correo electrónico o usuario</label>
+                <input type="text" id="loginUser" placeholder="ejemplo@correo.com" autocomplete="username">
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+            </div>
+            
+            <div style="text-align: center; margin: 16px 0;">
+                <button class="btn btn-outline" id="btnGoogleLogin"
+                    style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20"
+                        alt="Google">
+                    Iniciar sesión con Google
+                </button>
+            </div>
+
+            <button class="btn btn-primary" id="btnLoginSubmit">Entrar</button>
+            <p class="text-center mt-2" style="font-size:0.8rem;">
+                <a href="#" id="linkGoRegister"
+                    style="color: var(--azul-claro); text-decoration: none; font-weight:600;">¿No tienes cuenta?
+                    Regístrate</a>
+            </p>
+
+            <button class="btn btn-outline btn-small" id="btnBackHome1" style="margin-top:6px;">← Volver al
+                inicio</button>
+        </section>
+
+        <!-- PÁGINA DE REGISTRO -->
+        <section class="page" id="page-register">
+            <h2 style="color: var(--azul-oscuro); margin-bottom: 8px;">📝 Crear Cuenta</h2>
+            <p style="color: #5a6f82; font-size: 0.85rem; margin-bottom: 18px;">Regístrate para acceder a los
+                recursos de apoyo. Tus datos personales están resguardados.</p>
+
+            <div class="input-group">
+                <label>Nombre de usuario</label>
+                <input type="text" id="regUser" placeholder="Elige un nombre de usuario">
+            </div>
+            <div class="input-group">
+                <label>Correo electrónico</label>
+                <input type="email" id="regEmail" placeholder="correo@ejemplo.com">
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" id="regPass" placeholder="Mínimo 8 caracteres">
+            </div>
+            <div class="input-group">
+                <label>Confirmar contraseña</label>
+                <input type="password" id="regPassConfirm" placeholder="Repite la contraseña">
+            </div>
+
+            <button class="btn btn-primary" id="btnRegisterSubmit">Crear Cuenta</button>
+            <p class="text-center mt-2" style="font-size:0.8rem;">
+                <a href="#" id="linkGoLogin"
+                    style="color: var(--azul-claro); text-decoration: none; font-weight:600;">¿Ya tienes cuenta?
+                    Inicia sesión</a>
+            </p>
+
+            <button class="btn btn-outline btn-small" id="btnBackHome2" style="margin-top:6px;">← Volver al
+                inicio</button>
+
+        </section>
+
+        <!-- PÁGINA PRINCIPAL (POST-LOGIN) -->
+        <section class="page" id="page-dashboard">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <h2 style="color: var(--azul-oscuro); font-size: 1.2rem;">👋 Panel de Apoyo</h2>
+                <span class="anon-badge">🔒 Sesión segura</span>
+            </div>
+            <p style="font-size:0.85rem; color:#5a6f82; margin-bottom:16px;">Bienvenido, <strong
+                    id="displayUsername">Usuario</strong>. Aquí puedes realizar reportes y acceder a recursos.</p>
+
+            <!-- Funcionalidades clave -->
+            <div class="card">
+                <h3>📋 Nuevo Reporte Anónimo</h3>
+                <p>Cuéntanos lo que sucede. Puedes omitir datos que te identifiquen.</p>
+                <button class="btn btn-primary" id="btnNewReport" style="margin-top:8px;">Crear Reporte</button>
+            </div>
+
+            <div class="card">
+                <h3>📞 Líneas de Ayuda</h3>
+                <p>Fundación ANAR: <strong>900 20 20 10</strong> (España, confidencial)<br>Línea local: <strong>55
+                        5533 5533</strong></p>
+            </div>
+            
+            <div class="card">
+                <a href="Forov1.html" target="_self" class="btn btn-primary"> Ingresar al foro</a>
+            </div>
+
+            <button class="btn btn-outline btn-small" id="btnLogout" style="margin-top:10px;">Cerrar Sesión</button>
+        </section>
+
+        <!-- PÁGINA DE FORMULARIO DE REPORTE -->
+        <section class="page" id="page-report">
+            <h2 style="color: var(--azul-oscuro); margin-bottom: 6px;">📝 Reporte Anónimo</h2>
+            <span class="anon-badge">🕶️ Tu identidad está protegida</span>
+            <p style="font-size:0.8rem; color:#7f8c9b; margin-bottom:14px;">La información será manejada con
+                estricta confidencialidad por el equipo de orientación.</p>
+
+            <div class="input-group">
+                <label>Tipo de incidente</label>
+                <select id="tipoIncidente">
+                    <option value="">Selecciona una opción...</option>
+                    <option>Bullying / Acoso escolar</option>
+                    <option>Violencia física</option>
+                    <option>Violencia psicológica</option>
+                    <option>Ciberacoso</option>
+                    <option>Abuso</option>
+                    <option>Otro</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Descripción (puedes ser breve)</label>
+                <textarea id="descripcionReporte"
+                    placeholder="Describe lo sucedido. No es necesario que des tu nombre."></textarea>
+            </div>
+            <div class="input-group">
+                <label>Lugar aproximado (opcional)</label>
+                <input type="text" id="lugarReporte" placeholder="Ej. Salón de clases, patio, redes sociales...">
+            </div>
+
+            <button class="btn btn-primary" id="btnEnviarReporte">Enviar Reporte Anónimo</button>
+            <button class="btn btn-outline btn-small" id="btnBackDashboard" style="margin-top:10px;">← Volver al
+                panel</button>
+        </section>
+        <!-- PÁGINA FORO -->
+        <section class="page" id="foro">
+            <h2>💬 Foro de Apoyo</h2>
+            <p style="color:#5a6f82; font-size:0.85rem;">Comparte tus inquietudes de forma anónima o con tu usuario.
+            </p>
+
+            <div class="card">
+                <h3>Nuevo tema</h3>
+                <div class="input-group">
+                    <label>Título</label>
+                    <input type="text" id="foroTitulo" placeholder="Ej. Consejos para afrontar el estrés">
+                </div>
+                <div class="input-group">
+                    <label>Mensaje</label>
+                    <textarea id="foroContenido" placeholder="Escribe tu mensaje..."></textarea>
+                </div>
+                <button class="btn btn-primary" id="btnPublicarTema">Publicar tema</button>
+            </div>
+
+            <div id="listaTemas" class="card" style="margin-top:20px;">
+                <p>Cargando temas...</p>
+            </div>
+
+            <button class="btn btn-outline btn-small" id="btnBackFromForo" style="margin-top:10px;">← Volver al
+                panel</button>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        🛡️ Conexión Vital · Confidencialidad y protección de datos · v1.0
+    </footer>
+</div>
+
+<!-- Toast de notificación -->
+<div id="toast" class="toast" style="display: none;"></div>
+<script src="JS/js_alphav1.js" type="module"></script>
+
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>Foro Conexión Vital</title>
+  <style>
+    /* ===== ESTILOS GENERALES (infantiles) ===== */
+    :root {
+      --azul-suave: #6baed6;
+      --verde-menta: #7bc8a4;
+      --naranja-claro: #ffb347;
+      --rosa-pastel: #f8b4c8;
+      --morado-claro: #c3aed6;
+      --blanco: #fffef9;
+      --gris-fondo: #f7f9fc;
+      --texto: #3e4a5b;
+      --sombra-suave: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 768px) {
+
+      .app-container,
+      .foro-container {
+        max-width: 700px;
+        /* o el valor que quieras */
+        margin: 0 auto;
+      }
+
+      body {
+        font-family: 'Nunito', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        background: linear-gradient(135deg, #e8f4fd 0%, #fce4ec 50%, #e8fde8 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        color: var(--texto);
+      }
+
+      .foro-container {
+        width: 100%;
+        max-width: 480px;
+        background: white;
+        border-radius: 28px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 255, 255, 0.8) inset;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 700px;
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        /* antes 480px */
+        background: white;
+        border-radius: 0;
+        /* sin bordes redondeados */
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+
+
+      }
+
+      .foro-header {
+        background: linear-gradient(120deg, var(--azul-suave), var(--morado-claro));
+        padding: 16px 20px;
+        color: white;
+        text-align: center;
+        border-radius: 28px 28px 0 0;
+        position: relative;
+      }
+
+      .foro-header h1 {
+        font-size: 1.6rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .foro-header .subtitle {
+        font-size: 0.9rem;
+        opacity: 0.95;
+        margin-top: 4px;
+      }
+
+      .foro-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        background: var(--gris-fondo);
+      }
+
+      .dev-card {
+        background: white;
+        border-radius: 22px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: var(--sombra-suave);
+        margin-bottom: 16px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--verde-menta);
+        color: white;
+        border: none;
+      }
+
+      .btn-back {
+        background: white;
+        color: var(--azul-suave);
+        border: 2px solid var(--azul-suave);
+      }
+
+      .btn-back:hover {
+        background: #f0f7ff;
+      }
+
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: white;
+        border-top: 1px solid #e8edf2;
+        padding: 10px 0 14px;
+        border-radius: 0 0 28px 28px;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.02);
+      }
+
+      .nav-item {
+        background: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #9aa9b7;
+        cursor: pointer;
+        transition: 0.2s;
+        padding: 6px 12px;
+        border-radius: 16px;
+      }
+
+      .nav-item.active {
+        color: var(--azul-suave);
+        background: #f0f7ff;
+      }
+
+      .nav-item .icon {
+        font-size: 1.6rem;
+      }
+
+      .beta-badge {
+        background: var(--naranja-claro);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        position: absolute;
+        top: 12px;
+        right: 16px;
+      }
+
+      /* Estilos para comentarios */
+      .comentarios-container {
+        margin-top: 12px;
+        border-top: 2px dashed #e0e7ef;
+        padding-top: 12px;
+        text-align: left;
+      }
+
+      .comentario {
+        background: #f9fbfd;
+        border-radius: 12px;
+        padding: 10px;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+      }
+
+      .nuevo-comentario {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .nuevo-comentario input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 20px;
+        border: 2px solid #e0e7ef;
+        font-size: 0.85rem;
+      }
+
+      .nuevo-comentario button {
+        background: var(--azul-suave);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 0 16px;
+        cursor: pointer;
+      }
+
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="foro-container">
+    <header class="foro-header">
+      <span class="beta-badge">🚀 Beta</span>
+      <h1>
+        <span>💬</span> Foro Vital
+      </h1>
+      <p class="subtitle">Un espacio seguro para compartir</p>
+    </header>
+
+    <main class="foro-content">
+      <!-- Formulario para nuevo tema (visible solo autenticado) -->
+      <div class="dev-card" id="formularioTema" style="display: none;">
+        <h3 style="margin-bottom:12px;">🌟 Crear nuevo tema</h3>
+        <div style="margin-bottom:12px;">
+          <input type="text" id="foroTitulo" placeholder="Título de tu tema"
+            style="width:100%; padding:10px; border-radius:10px; border:2px solid #e0e7ef; font-size:1rem;">
+        </div>
+        <div style="margin-bottom:12px;">
+          <textarea id="foroContenido" placeholder="Escribe tu mensaje..."
+            style="width:100%; padding:10px; border-radius:10px; border:2px solid #e0e7ef; font-size:1rem; resize:vertical; min-height:80px;"></textarea>
+        </div>
+        <button class="btn btn-primary" id="btnPublicarTema">Publicar tema</button>
+      </div>
+
+      <!-- Lista de temas -->
+      <div id="listaTemas">
+        <p style="text-align:center; color:#7f8c9b;">Cargando temas...</p>
+      </div>
+    </main>
+
+    <!-- Barra de navegación inferior estilo Facebook -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" id="navInicio">
+        <span class="icon">🏠</span>
+        <span>Inicio</span>
+      </button>
+      <button class="nav-item" id="navAmigos">
+        <span class="icon">👥</span>
+        <span>Amigos</span>
+      </button>
+      <button class="nav-item" id="navNotificaciones">
+        <span class="icon">🔔</span>
+        <span>Notis</span>
+      </button>
+      <button onclick="window.location.href='Mi_perfil.html'" class="nav-item" id="navPerfil">
+        <span class="icon">👤</span>
+        <span>Perfil</span>
+      </button>
+    </nav>
+  </div>
+
+  <div id="toast"
+    style="position:fixed; top:20px; left:50%; transform:translateX(-50%); background:#ffb347; color:white; padding:12px 24px; border-radius:30px; font-weight:bold; box-shadow:0 8px 20px rgba(255,179,71,0.4); display:none; z-index:999;">
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, updateDoc, doc, arrayUnion, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // Configuración de Firebase (reemplaza con la tuya)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAIxUOpEjRwtxMHPicFOMqscxqb-nWYEYA",
+      authDomain: "conexion-vital-cdb49.firebaseapp.com",
+      projectId: "conexion-vital-cdb49",
+      storageBucket: "conexion-vital-cdb49.firebasestorage.app",
+      messagingSenderId: "1067275843636",
+      appId: "1:1067275843636:web:3dd0074322cd11d6df7261"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Referencias elementos DOM
+    const formularioTema = document.getElementById('formularioTema');
+    const foroTitulo = document.getElementById('foroTitulo');
+    const foroContenido = document.getElementById('foroContenido');
+    const btnPublicarTema = document.getElementById('btnPublicarTema');
+    const listaTemas = document.getElementById('listaTemas');
+    const toast = document.getElementById('toast');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    // Toast
+    function mostrarToast(mensaje, esExito = true) {
+      toast.textContent = mensaje;
+      toast.style.display = 'block';
+      toast.style.background = esExito ? '#7bc8a4' : '#f8b4c8';
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+
+    // Navegación inferior (simulada)
+    const accionesNav = {
+      navInicio: 'Estás en Inicio',
+      navAmigos: 'Sección de Amigos en construcción',
+      navNotificaciones: 'No tienes notificaciones nuevas',
+      navPerfil: 'Perfil en desarrollo'
+    };
+    navItems.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navItems.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        mostrarToast('🚧 ' + accionesNav[btn.id]);
+      });
+    });
+
+    // Autenticación anónima
+    (async () => {
+      try {
+        await signInAnonymously(auth);
+        console.log("Usuario anónimo listo");
+      } catch (e) {
+        console.warn("No se pudo iniciar sesión anónima", e);
+      }
+    })();
+
+    // Mostrar/ocultar formulario según autenticación
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (formularioTema) formularioTema.style.display = 'block';
+      } else {
+        if (formularioTema) formularioTema.style.display = 'none';
+      }
+    });
+
+    // Cargar temas en tiempo real con onSnapshot
+    const q = query(collection(db, "foro"), orderBy("fecha", "desc"));
+    onSnapshot(q, (snapshot) => {
+      listaTemas.innerHTML = '';
+      if (snapshot.empty) {
+        listaTemas.innerHTML = '<div class="dev-card"><p>¡Nadie ha escrito aún! Sé el primero en compartir 🌟</p></div>';
+        return;
+      }
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const fecha = data.fecha ? data.fecha.toDate().toLocaleString('es-MX', { dateStyle: 'medium', timeStyle: 'short' }) : 'Sin fecha';
+        const tarjeta = document.createElement('div');
+        tarjeta.className = 'dev-card';
+        tarjeta.style.cssText = 'text-align:left; margin-bottom:12px;';
+        tarjeta.innerHTML = `
+          <h4 style="margin-bottom:6px;">${data.titulo}</h4>
+          <p style="font-size:0.9rem; color:#5a6f82;">${data.contenido}</p>
+          <small style="color:#9aa9b7;">Por ${data.autor || 'Anónimo'} · ${fecha}</small>
+          <div class="comentarios-container" id="comentarios-${doc.id}">
+            <button class="btn-mostrar-comentarios" data-id="${doc.id}" style="background:none; border:none; color:var(--azul-suave); cursor:pointer; font-weight:bold; margin-top:8px;">💬 Comentarios (${(data.respuestas || []).length})</button>
+            <div class="lista-comentarios" id="lista-comentarios-${doc.id}" style="display:none;"></div>
+            <div class="nuevo-comentario" id="nuevo-comentario-${doc.id}" style="display:none;">
+              <input type="text" placeholder="Escribe un comentario..." id="input-comentario-${doc.id}">
+              <button id="btn-comentar-${doc.id}">Enviar</button>
+            </div>
+          </div>
+        `;
+        listaTemas.appendChild(tarjeta);
+
+        // Evento para mostrar/ocultar comentarios
+        const btnMostrar = tarjeta.querySelector('.btn-mostrar-comentarios');
+        const listaComentarios = tarjeta.querySelector('.lista-comentarios');
+        const nuevoComentario = tarjeta.querySelector('.nuevo-comentario');
+
+        btnMostrar.addEventListener('click', () => {
+          const visible = listaComentarios.style.display === 'block';
+          listaComentarios.style.display = visible ? 'none' : 'block';
+          nuevoComentario.style.display = visible ? 'none' : 'flex';
+          if (!visible) {
+            cargarComentarios(doc.id, listaComentarios);
+          }
+        });
+
+        // Evento para enviar comentario
+        const btnComentar = tarjeta.querySelector(`#btn-comentar-${doc.id}`);
+        const inputComentario = tarjeta.querySelector(`#input-comentario-${doc.id}`);
+        btnComentar.addEventListener('click', () => agregarComentario(doc.id, inputComentario));
+      });
+    });
+
+    // Función para cargar comentarios desde Firestore y mostrarlos
+    async function cargarComentarios(temaId, contenedor) {
+      const docRef = doc(db, "foro", temaId);
+      // Usamos onSnapshot para actualizar comentarios en tiempo real
+      onSnapshot(docRef, (snap) => {
+        const data = snap.data();
+        const respuestas = data.respuestas || [];
+        contenedor.innerHTML = '';
+        respuestas.forEach(resp => {
+          const div = document.createElement('div');
+          div.className = 'comentario';
+          div.innerHTML = `<strong>${resp.autor || 'Anónimo'}:</strong> ${resp.contenido}`;
+          contenedor.appendChild(div);
+        });
+      });
+    }
+
+    // Función para agregar un comentario al tema
+    async function agregarComentario(temaId, inputElement) {
+      const contenido = inputElement.value.trim();
+      if (!contenido) {
+        mostrarToast('Escribe un comentario', false);
+        return;
+      }
+      const user = auth.currentUser;
+      const comentario = {
+        autor: user ? (user.displayName || 'Anónimo') : 'Anónimo',
+        contenido: contenido,
+        fecha: new Date()
+      };
+      try {
+        const docRef = doc(db, "foro", temaId);
+        await updateDoc(docRef, {
+          respuestas: arrayUnion(comentario)
+        });
+        inputElement.value = '';
+        mostrarToast('Comentario agregado 🎉');
+      } catch (error) {
+        console.error(error);
+        mostrarToast('No se pudo agregar el comentario', false);
+      }
+    }
+
+    // Publicar tema
+    btnPublicarTema.addEventListener('click', async () => {
+      const titulo = foroTitulo.value.trim();
+      const contenido = foroContenido.value.trim();
+      if (!titulo || !contenido) {
+        mostrarToast('Completa todos los campos', false);
+        return;
+      }
+      try {
+        const user = auth.currentUser;
+        await addDoc(collection(db, "foro"), {
+          titulo,
+          contenido,
+          autor: user ? (user.displayName || 'Anónimo') : 'Anónimo',
+          uid: user ? user.uid : null,
+          fecha: serverTimestamp(),
+          respuestas: []
+        });
+        mostrarToast('¡Tema publicado! 🎉');
+        foroTitulo.value = '';
+        foroContenido.value = '';
+      } catch (error) {
+        console.error(error);
+        mostrarToast('Ups, no se pudo publicar', false);
+      }
+    });
+  </script>
+</body>
+
+</html>
+
+
+</html>
